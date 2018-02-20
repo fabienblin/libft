@@ -17,7 +17,7 @@ void	puttformat(t_format *f)
 		printf("\tsize : %d\n",f->size);
 		printf("\tpreci : %d\n",f->preci);
 		printf("\twidth : %d\n",f->width);
-		printf("\tflags : %5s\n",f->flags);
+		printf("\tflags : \"%s\"\n",f->flags);
 		printf("\n");
 		f = f->next;
 		i++;

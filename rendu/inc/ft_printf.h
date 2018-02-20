@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/18 15:07:37 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 11:46:08 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,12 +21,12 @@
 
 typedef enum	e_size
 {
-	HH,
-	H,
-	LL,
-	L,
-	J,
-	Z
+	HH = 1,
+	H = 2,
+	LL = 3,
+	L = 4,
+	J = 5,
+	Z = 6
 }				e_size;
 
 typedef struct	s_format

@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:20:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 17:32:01 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 12:23:45 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ int main (int argc, char **argv)
 */	
 	(void)argc;
 	(void)argv;
-	ft_printf("abc %s%s", "hey", NULL);
+	ft_printf("%-+5.3hs", "coucou");
 	return (0);
 }
 
@@ -49,7 +49,7 @@ void	ft_format_tostring(t_format *format_lst, va_list ap)
 	else if (t == 'x' || t == 'X')
 		format_lst->tostring = ft_strdup(ft_itoa((int)va_arg(ap, unsigned int)));
 	else if (t == 'c' || t == 'C')
-		format_lst->tostring = ft_strdup(va_arg(ap, unsigned char));
+		format_lst->tostring = ft_strdup(va_arg(ap, char *));
 	if (format_lst->tostring == NULL)
 		format_lst->tostring = ft_strdup("(null)");
 }

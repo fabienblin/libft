@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 13:09:01 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 10:21:38 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 12:22:22 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,7 @@ t_format	*ft_new_format(char *substr)
 	if (!(new_format = (t_format *)malloc(sizeof(t_format))))
 		return (NULL);
 	ft_bzero(new_format, sizeof(t_format));
+	ft_memset(new_format->flags, 1, 5);
 	if (substr && *substr == '%')
 	{
 		c = substr + 1;
