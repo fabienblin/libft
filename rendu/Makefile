@@ -6,37 +6,61 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/02/01 13:29:17 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/02/19 15:05:17 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME	=	ft_printf.a
 
-SRC		=	ft_constructors.c	ft_destructors.c	ft_parse.c	ft_printf.c
+SRC_DIR =	./src/
 
-OBJ		=	$(SRC:.c=.o)
+OBJ_DIR =	./obj/
+
+INC_DIR =	./inc/
+
+LIB_DIR	=	./libft/
+
+CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
+			ft_format_setters.c
+
+OFILES	=	$(CFILES:.c=.o)
+
+SOURCES	=	$(addprefix $(SRC_DIR), $(CFILES))
+
+OBJECTS	=	$(addprefix $(OBJ_DIR), $(OFILES))
 
 FLAGS	=	-Wall -Wextra -Werror
 
 all		:	$(NAME)
 
-$(NAME)	:	$(OBJ)
-			make -C libft/
-			gcc $(FLAGS) $(OBJ) -L libft/ -lft -o $(NAME)
-			echo "$(NAME) is compiled"
+$(NAME)	:	mkdir_obj libft $(OBJECTS)
+			ar rc $(NAME) $(OBJECTS)
+			@echo "===> FT_PRINTF HAS BEEN COMPILED <==="
 
-%.o		:	%.c inc/ft_printf.h
-			gcc $(FLAGS) -c $< -o $@ -I inc/ -I libft/inc/
+$(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(INC_DIR)ft_printf.h ./libft/inc/libft.h
+					gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR) -I ./libft/inc/
+
+mkdir_obj	:
+				mkdir -p $(OBJ_DIR)
+
+libft	:
+			make -C $(LIB_DIR)
 
 clean	:
-			make -C clean libft/
-			rm $(OBJ)
+			@make clean -C $(LIB_DIR)
+			@rm $(OBJECTS)
 
-fclean	:	clean
-			make fclean -C libft/
-			rm -f $(NAME)
+fclean	:
+			@make fclean -C $(LIB_DIR)
+			@rm -f $(NAME)
+			@rm -rf $(OBJ_DIR)
 
 re		:	fclean all
 
-.PHONY: all clean fclean re
+debug	:
+			gcc -ggdb src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && lldb ft_printf
+test	:
+			gcc src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && ./ft_printf
+
+.PHONY: all clean fclean re debug libft
