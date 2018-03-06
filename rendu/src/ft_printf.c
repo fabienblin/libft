@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:20:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 12:23:45 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/06 14:46:13 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,33 +25,9 @@ int main (int argc, char **argv)
 */	
 	(void)argc;
 	(void)argv;
-	ft_printf("%-+5.3hs", "coucou");
+	ft_printf("%d", -10);
+	printf("%d", -10);
 	return (0);
-}
-
-void	ft_format_tostring(t_format *format_lst, va_list ap)
-{
-	char	t;
-	
-	t = format_lst->type;
-	if (t == 's' || t == 'S')
-		format_lst->tostring = ft_strdup(va_arg(ap, char *));
-	else if (t == 'p')
-		format_lst->tostring = ft_strdup(ft_itoa_base((int)va_arg(ap, void *), 16));
-	else if (t == 'd' || t == 'D')
-		format_lst->tostring = ft_strdup(ft_itoa((int)va_arg(ap, int)));
-	else if (t == 'i')
-		format_lst->tostring = ft_strdup(ft_itoa((int)va_arg(ap, int)));
-	else if (t == 'o' || t == 'O')
-		format_lst->tostring = ft_strdup(ft_itoa((int)va_arg(ap, unsigned int)));
-	else if (t == 'u' || t == 'U')
-		format_lst->tostring = ft_strdup(ft_itoa((int)va_arg(ap, unsigned int)));
-	else if (t == 'x' || t == 'X')
-		format_lst->tostring = ft_strdup(ft_itoa((int)va_arg(ap, unsigned int)));
-	else if (t == 'c' || t == 'C')
-		format_lst->tostring = ft_strdup(va_arg(ap, char *));
-	if (format_lst->tostring == NULL)
-		format_lst->tostring = ft_strdup("(null)");
 }
 
 int	ft_printf(const char *format, ...)
@@ -61,16 +37,14 @@ int	ft_printf(const char *format, ...)
 	t_format	*first;
 
 	va_start(ap, format);
-	format_lst = ft_parse((char *)format);
-	
+	format_lst = ft_parse((char *)format, ap);
+
 	first = format_lst;
-	
-	
-	while (format_lst)
+/*	while (format_lst)
 	{
-		ft_format_tostring(format_lst, ap);
 		format_lst = format_lst->next;
 	}
+	*/
 	puttformat(first);
 	va_end(ap);
 	return (0);

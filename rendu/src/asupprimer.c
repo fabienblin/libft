@@ -18,6 +18,8 @@ void	puttformat(t_format *f)
 		printf("\tpreci : %d\n",f->preci);
 		printf("\twidth : %d\n",f->width);
 		printf("\tflags : \"%s\"\n",f->flags);
+		printf("\tlen : %d\n",f->len);
+		printf("\tcap : %d\n",f->capital);
 		printf("\n");
 		f = f->next;
 		i++;

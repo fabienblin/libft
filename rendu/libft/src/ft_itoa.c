@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_itoa.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:24 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/28 17:35:24 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/27 14:44:45 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,23 +28,22 @@ char		*ft_itoa(int n)
 	char			*ret;
 	int				neg;
 	int				ret_size;
-	unsigned int	n_long;
 
-	n_long = (long int)n;
 	neg = n < 0;
 	if (neg)
-		n_long = -n;
-	ret_size = ft_intlen(n_long);
-	if (!(ret = (char *)ft_memalloc(sizeof(ret) * ret_size + 2)))
+		n = -n;
+	ret_size = ft_intlen(n) + neg;
+	if (!(ret = ft_strnew(ret_size)))
 		return (NULL);
-	ret[ret_size + 1] = '\0';
-	ret[0] = '-';
 	while (ret_size > 0)
 	{
-		ret[ret_size--] = ((n_long % 10) + '0');
-		n_long /= 10;
+		ret[--ret_size] = ((n % 10) + '0');
+		n /= 10;
 	}
-	if (!neg)
-		ret++;
+	if (neg)
+	{
+		ret[0] = '-';
+		ret_size--;
+	}
 	return (ret);
 }

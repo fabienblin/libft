@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 13:09:01 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 12:22:22 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/26 11:42:33 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 
 
-t_format	*ft_new_format(char *substr)
+t_format	*ft_new_format(char *substr, va_list ap)
 {
 	t_format	*new_format;
 	char		*c;
@@ -32,8 +32,11 @@ t_format	*ft_new_format(char *substr)
 		c = ft_set_preci(c, new_format);
 		c = ft_set_size(c, new_format);
 		c = ft_set_type(c, new_format);
+		ft_set_capital(new_format);
+		ft_set_tostring(new_format, ap);
 	}
 	else if (substr && *substr != '%')
 		new_format->tostring = ft_strdup(substr);
+	ft_set_len(new_format);
 	return (new_format);
 }

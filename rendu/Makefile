@@ -6,7 +6,7 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/02/19 15:05:17 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/02/20 14:51:17 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,7 +22,7 @@ INC_DIR =	./inc/
 LIB_DIR	=	./libft/
 
 CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
-			ft_format_setters.c
+			ft_format_setters.c	ft_tostring.c
 
 OFILES	=	$(CFILES:.c=.o)
 

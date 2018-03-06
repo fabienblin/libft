@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 12:13:59 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/06 14:34:41 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ char		*ft_set_flags(char *c, t_format *f)
 		if (ft_strchr(c, '-'))
 			f->flags[i] = '-';
 		i++;
-		if (ft_strchr(c, '0'))
+		if (ft_strchr(c, '0') < ft_strchr(c, '.'))
 			f->flags[i] = '0';
 		i++;
 		if (ft_strchr(c, '#'))
@@ -56,9 +56,14 @@ char		*ft_set_preci(char *c, t_format *f)
 	if (*c == '.')
 	{
 		c++;
-		f->preci = (unsigned int)ft_atoi(c);
-		while(ft_isdigit(*c))
-			c++;
+		if (ft_isdigit(*c) || *c == '+' || *c == '-')
+		{
+			f->preci = ft_atoi(c);
+			if (*c == '+' || *c == '-')
+				c++;
+			while(ft_isdigit(*c))
+				c++;
+		}
 	}
 	return (c);
 }
@@ -97,4 +102,19 @@ char		*ft_set_type(char *c, t_format *f)
 	else
 	 	f->type = 0;
 	return (c);
+}
+
+void		ft_set_len(t_format *f)
+{
+	f->len = ft_strlen(f->tostring);
+}
+
+void		ft_set_tostring(t_format *f, va_list ap)
+{
+	ft_type_tostring(f, ap);
+}
+
+void		ft_set_capital(t_format *f)
+{
+	f->capital = f->type >= 'A' && f->type <='Z';
 }
