@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:42 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 18:46:52 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/09 14:45:52 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,4 +103,8 @@ void			ft_swapptr(void **a, void **b);
 int				get_next_line(int fd, char **line);
 char			*ft_strjoinfree(char *s1, char *s2);
 char			*ft_itoa_base(int n, int base);
+int				ft_abs(int x);
+char			*ft_strtolower(char *str);
+char			*ft_strrealloc(char **str, size_t size);
+
 #endif

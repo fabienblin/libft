@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/06 14:34:41 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/09 19:18:32 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ char		*ft_set_flags(char *c, t_format *f)
 		if (ft_strchr(c, '-'))
 			f->flags[i] = '-';
 		i++;
-		if (ft_strchr(c, '0') < ft_strchr(c, '.'))
+		if (ft_strchr(c, '0') && ft_strchr(c, '0') < ft_strchr(c, '.'))
 			f->flags[i] = '0';
 		i++;
 		if (ft_strchr(c, '#'))
@@ -44,7 +44,7 @@ char		*ft_set_width(char *c, t_format *f)
 {
 	if (ft_isdigit(*c))
 	{
-		f->width = (unsigned int)ft_atoi(c);
+		f->width = ft_atoi(c);
 		while(ft_isdigit(*c))
 			c++;
 	}
@@ -65,6 +65,8 @@ char		*ft_set_preci(char *c, t_format *f)
 				c++;
 		}
 	}
+	else
+		f->preci = -1;
 	return (c);
 }
 
@@ -93,8 +95,8 @@ char		*ft_set_size(char *c, t_format *f)
 char		*ft_set_type(char *c, t_format *f)
 {
 	if (*c == 's' || *c == 'S' || *c == 'p' || *c == 'd' || *c == 'D' ||
-		*c == 'i' || *c == 'o' || *c == 'u' || *c == 'U' || *c == 'x' ||
-		*c == 'X' || *c == 'c' || *c == 'C')
+		*c == 'i' || *c == 'o' || *c == 'O' || *c == 'u' || *c == 'U' ||
+		*c == 'x' || *c == 'X' || *c == 'c' || *c == 'C')
 	{
 		f->type = *c;
 		c++;
@@ -106,15 +108,10 @@ char		*ft_set_type(char *c, t_format *f)
 
 void		ft_set_len(t_format *f)
 {
-	f->len = ft_strlen(f->tostring);
+	f->len = ft_strlen((char *)f->tostring);
 }
 
 void		ft_set_tostring(t_format *f, va_list ap)
 {
 	ft_type_tostring(f, ap);
-}
-
-void		ft_set_capital(t_format *f)
-{
-	f->capital = f->type >= 'A' && f->type <='Z';
 }

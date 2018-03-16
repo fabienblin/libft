@@ -6,7 +6,7 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/28 17:35:55 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/02/18 12:14:53 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/03/09 14:46:22 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -21,7 +21,7 @@ NAME =		libft.a
 
 FABLIN =	ft_exit.c		ft_realloc.c	ft_lstpush.c	ft_lstdup.c		\
 			ft_swapptr.c	get_next_line.c	ft_strjoinfree.c				\
-			ft_itoa_base.c
+			ft_itoa_base.c	ft_abs.c		ft_strtolower.c	ft_strrealloc.c
 
 BONUS =		ft_lstnew.c		ft_lstdelone.c	ft_lstdel.c		ft_lstadd.c		\
 			ft_lstiter.c	ft_lstmap.c

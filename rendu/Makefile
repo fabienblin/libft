@@ -6,12 +6,12 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/02/20 14:51:17 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/03/16 15:03:53 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
-NAME	=	ft_printf.a
+NAME	=	libftprintf.a
 
 SRC_DIR =	./src/
 
@@ -22,7 +22,9 @@ INC_DIR =	./inc/
 LIB_DIR	=	./libft/
 
 CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
-			ft_format_setters.c	ft_tostring.c
+			ft_format_setters.c	ft_tostring.c		ft_u_itoa_base.c		\
+			ft_ptoa.c			ft_strgen.c
+			
 
 OFILES	=	$(CFILES:.c=.o)
 
@@ -35,8 +37,8 @@ FLAGS	=	-Wall -Wextra -Werror
 all		:	$(NAME)
 
 $(NAME)	:	mkdir_obj libft $(OBJECTS)
-			ar rc $(NAME) $(OBJECTS)
-			@echo "===> FT_PRINTF HAS BEEN COMPILED <==="
+			ar rcs $(NAME) $(OBJECTS) ./libft/obj/*.o
+			@echo "===> LIBFTPRINTF.A HAS BEEN COMPILED <==="
 
 $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(INC_DIR)ft_printf.h ./libft/inc/libft.h
 					gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR) -I ./libft/inc/
@@ -59,8 +61,8 @@ fclean	:
 re		:	fclean all
 
 debug	:
-			gcc -ggdb src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && lldb ft_printf
+			gcc -ggdb ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && lldb ft_printf
 test	:
-			gcc src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && ./ft_printf
+			gcc ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && ./ft_printf
 
-.PHONY: all clean fclean re debug libft
+.PHONY	:	all clean fclean re debug libft

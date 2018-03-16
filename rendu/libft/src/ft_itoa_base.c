@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 16:52:26 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/27 14:49:25 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/07 13:47:26 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(unsigned int x, int base)
+static int	ft_intlen(int x, int base)
 {
 	int len;
 
