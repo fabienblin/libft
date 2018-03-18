@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_puttostring.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/10 11:25:44 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/18 17:08:48 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/16 21:01:32 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/16 22:48:13 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "rendu/inc/ft_printf.h"
+#include "ft_printf.h"
 
-#include <stdio.h>
-
-int main (int argc, char **argv)
+void	ft_puttostring(t_format *f)
 {
-/*	if (argc != 2)
-	{
-		printf("Usage : %s format", argv[0]);
-	}
+	int		s;
+	char	t;
 	
-*/	
-	(void)argc;
-	(void)argv;
-	ft_printf("%llU\n", 21474836489);
-	printf("%llU\n", 21474836489);
-	return (0);
+	s = f->size;
+	t = f->type;
+	if (s == HH && (t =='d' || t =='o' || t =='u' || t =='x'))
+	;
+	else if (s == H)
+	;
+	else if (s == LL)
+	;
+	else if (s == L && (t == 's' || t == 'd' || t == 'i' || t == 'o' || t == 'u'
+			|| t == 'x' || t == 'c'))
+			;
+	else if (s == J)
+	;
+	else if (s == Z)
+	;
+	else
+		;
 }

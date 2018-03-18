@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/09 17:19:55 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/17 20:12:19 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ typedef struct	s_format
 	int					preci;		// .x
 	int					size;		//	hh h l ll j z
 	char				type;		//	s S p d D i o O u U x X c C
-	wchar_t				*tostring;	//	chaine basique
+	void				*tostring;	//	chaine basique
 	int					len;		//	ft_strlen()
 
 }				t_format;
@@ -48,10 +48,12 @@ typedef struct	s_format
 t_format	*ft_new_format(char *substr);
 t_format	*ft_parse(char *format);
 int			ft_printf(const char *format, ...);
-char		*ft_u_itoa_base(unsigned int n, int base);
+char		*ft_uintmax_itoa_type(uintmax_t n, char t);
+char		*ft_intmax_itoa_type(intmax_t n, char t);
 char		*ft_ptoa(void *p);
 wchar_t		*ft_strgen(int c, int len);
 void		ft_del_format_lst(t_format *f);
+void		ft_puttostring(t_format *f);
 
 // ft_format_setters.c
 char		*ft_set_flags(char *c, t_format *f);

@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 11:27:02 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/09 17:32:25 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/16 20:25:18 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,17 +17,16 @@
 
 char	*ft_find_type(char *str)
 {
-	char	*end;
+	char	*type;
 	
-	end = str;
-	while (*end)
+	type = str;
+	while (*type++)
 	{
-		if (*end == 's' || *end == 'S' || *end == 'p' || *end == 'd' ||
-			*end == 'D' || *end == 'i' || *end == 'o' || *end == 'O' ||
-			*end == 'u' || *end == 'U' || *end == 'x' || *end == 'X' ||
-			*end == 'c' || *end == 'C')
-			return (end);
-		end++;
+		if (*type == 's' || *type == 'S' || *type == 'p' || *type == 'd' ||
+			*type == 'D' || *type == 'i' || *type == 'o' || *type == 'O' ||
+			*type == 'u' || *type == 'U' || *type == 'x' || *type == 'X' ||
+			*type == 'c' || *type == 'C' || *type == '%')
+			return (type);
 	}
 	return (NULL);
 }
@@ -49,6 +48,7 @@ t_format	*ft_parse(char *format)
 	char		*substr;
 	char		*begin;
 	char		*end;
+	char		*tmp;
 	
 	begin = format;
 	end  = format;
@@ -56,12 +56,13 @@ t_format	*ft_parse(char *format)
 	while (*begin)
 	{
 		substr = NULL;
+		tmp = ft_strchr(begin, '%');
 		if (*begin == '%')
 			end = ft_find_type(begin) + 1;
-		else if ((substr = ft_strchr(begin, '%')) == NULL)
+		else if (tmp == NULL)
 			end = begin + ft_strlen(begin);
 		else
-			end = substr;
+			end = tmp;
 		substr = ft_strsub(begin, 0, end - begin);
 		ft_format_push(&format_lst, ft_new_format(substr));
 		free(substr);

@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/09 19:18:32 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/16 19:06:40 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,7 @@ char		*ft_set_width(char *c, t_format *f)
 
 char		*ft_set_preci(char *c, t_format *f)
 {
-	if (*c == '.')
+	if (c && *c == '.')
 	{
 		c++;
 		if (ft_isdigit(*c) || *c == '+' || *c == '-')
@@ -96,7 +96,7 @@ char		*ft_set_type(char *c, t_format *f)
 {
 	if (*c == 's' || *c == 'S' || *c == 'p' || *c == 'd' || *c == 'D' ||
 		*c == 'i' || *c == 'o' || *c == 'O' || *c == 'u' || *c == 'U' ||
-		*c == 'x' || *c == 'X' || *c == 'c' || *c == 'C')
+		*c == 'x' || *c == 'X' || *c == 'c' || *c == 'C' || *c == '%')
 	{
 		f->type = *c;
 		c++;

@@ -6,15 +6,13 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/20 15:16:17 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/10 11:41:04 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/18 17:10:29 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// nombre minimum de chiffres à faire apparaître lors des conversions d, i, o, u, x, et X
-// nombre maximum de caractères à imprimer depuis une chaîne pour les conversions s et S
 void	ft_preci_tostring(t_format *f)
 {
 	wchar_t	*tmp;
@@ -23,13 +21,11 @@ void	ft_preci_tostring(t_format *f)
 	if (f->preci != -1)
 	{
 		tmp_len = f->preci - f->len;
-		// preci < len donc on veut raccourcir tostring
 		if ((f->type == 's' || f->type == 'S') && f->preci < f->len)
 		{
 			f->tostring = (wchar_t *)ft_strrealloc((char **)&f->tostring, f->preci);
 			f->len = f->preci;
 		}
-		// preci > len donc on veut ralonger tostring
 		else if (!(f->type == 's' || f->type == 'S') && f->preci > f->len)
 		{
 			tmp = ft_strgen('0', tmp_len);
@@ -37,44 +33,8 @@ void	ft_preci_tostring(t_format *f)
 			f->len += tmp_len;
 		}
 	}
-	else if (f->preci == -1)
-		f->tostring = (wchar_t *)ft_strrealloc((char **)&f->tostring, 0);
-}
- 
-void	ft_type_tostring(t_format *f, va_list ap)
-{
-	char	t;
-	
-	t = f->type;
-	if (t == 's' || t == 'S')
-		f->tostring = (wchar_t *)ft_strdup(va_arg(ap, char *));
-	else if (t == 'p')
-	{
-		f->tostring = (wchar_t *)ft_ptoa(va_arg(ap, void *));
-		wchar_t *tmp = (wchar_t *)ft_strdup("0x");
-		f->tostring = (wchar_t *)ft_strjoinfree((char *)tmp, (char *)f->tostring);
-	}
-	else if (t == 'd' || t == 'D' || t == 'i')
-		f->tostring = (wchar_t *)(ft_itoa(va_arg(ap, int)));
-	else if (t == 'o' || t == 'O')
-		f->tostring = (wchar_t *)(ft_u_itoa_base(va_arg(ap, unsigned int), 8));
-	else if (t == 'u' || t == 'U')
-		f->tostring = (wchar_t *)(ft_u_itoa_base(va_arg(ap, unsigned int), 10));
-	else if (t == 'x' || t == 'X')
-		f->tostring = (wchar_t *)(ft_u_itoa_base(va_arg(ap, unsigned int), 16));
-	else if (t == 'c' || t == 'C')
-	{
-		f->tostring = (wchar_t *)ft_strnew(sizeof(wchar_t));
-		f->tostring[0] = va_arg(ap, int);
-	}
-	if (t == 'x' || t == 'p')
-		f->tostring = (wchar_t *)ft_strtolower((char *)f->tostring);
-	if (f->tostring == NULL)
-		f->tostring = (wchar_t *)ft_strdup("(null)");
-	ft_set_len(f);
 }
 
-// ajoute des espaces a gauche ou a droite du tostring
 void	ft_width_tostring(t_format *f)
 {
 	wchar_t	*tmp;
@@ -96,4 +56,108 @@ void	ft_width_tostring(t_format *f)
 void	ft_flags_tostring(t_format *f)
 {
 	(void)f;
+}
+
+void	ft_type_s_tostring(t_format *f, va_list ap)
+{
+	if ((f->type == 's' && f->size == L) || f->type == 'S')
+	{
+		f->tostring = (void *)ft_strdup((char *)va_arg(ap, wchar_t *));
+	}
+	else
+	{
+		f->tostring = (void *)ft_strdup(va_arg(ap, char *));
+	}
+}
+
+void	ft_type_c_tostring(t_format *f, va_list ap)
+{
+	if ((f->type == 'c' && f->size == L) || f->type == 'C')
+	{
+		f->tostring = (void *)ft_strnew(sizeof(wchar_t));
+		*(wchar_t *)f->tostring = va_arg(ap, wchar_t);
+	}
+	else
+	{
+		f->tostring = (void *)ft_strnew(sizeof(int));
+		*(int *)f->tostring = va_arg(ap, int);
+	}
+}
+
+void	ft_type_p_tostring(t_format *f, va_list ap)
+{
+	f->tostring = ft_ptoa(va_arg(ap, void *));
+	f->tostring = (void *)ft_strjoinfree(ft_strdup("0x"), (char *)f->tostring);
+}
+
+void	ft_type_di_tostring(t_format *f, va_list ap)
+{
+	int			t;
+	intmax_t	arg;
+	
+	t = (f->type == 'd' || f->type == 'i');
+	arg = va_arg(ap, intmax_t);
+	if ((t && f->size == L) || f->type == 'D')
+		arg = (long int)arg;
+	else if (t && f->size == LL)
+		arg = (long long int)arg;
+	else if (t && f->size == H)
+		arg = (short int)arg;
+	else if (t && f->size == HH)
+		arg = (signed char)arg;
+	else if (t && f->size == J)
+		arg = (intmax_t)arg;
+	else if (t && f->size == Z)
+		arg = (size_t)arg;
+	else
+		arg = (int)arg;
+	f->tostring = (void *)ft_intmax_itoa_type(arg, f->type);
+}
+
+void	ft_type_uox_tostring(t_format *f, va_list ap)
+{
+	int			t;
+	uintmax_t	arg;
+
+	t = (f->type == 'u' || f->type == 'o' || f->type == 'x' ||	f->type == 'X');
+	arg = va_arg(ap, uintmax_t);
+	if ((t && f->size == L) || f->type == 'U' || f->type == 'O')
+		arg = (unsigned long int)arg;
+	else if (t && f->size == LL)
+		arg = (unsigned long long int)arg;
+	else if (t && f->size == H)
+		arg = (unsigned short int)arg;
+	else if (t && f->size == HH)
+		arg = (unsigned char)arg;
+	else if (t && f->size == J)
+		arg = (uintmax_t)arg;
+	else if (t && f->size == Z)
+		arg = (size_t)arg;
+	else
+		arg = (unsigned int)arg;
+	f->tostring = (void *)ft_uintmax_itoa_type(arg, f->type);
+}
+
+void	ft_type_tostring(t_format *f, va_list ap)
+{
+	char	t;
+	
+	t = f->type;
+	if (t == 's' || t == 'S')
+		ft_type_s_tostring(f, ap);
+	else if (t == 'p')
+		ft_type_p_tostring(f, ap);
+	else if (t == 'd' || t == 'D' || t == 'i')
+		ft_type_di_tostring(f, ap);
+	else if (t == 'o' || t == 'O' || t == 'u' || t == 'U' || t == 'x' || t == 'X')
+		ft_type_uox_tostring(f, ap);
+	else if (t == 'c' || t == 'C')
+		ft_type_c_tostring(f, ap);
+	else if (t == '%')
+		f->tostring = (void *)ft_strdup("%");
+	if (t == 'x' || t == 'p')
+		f->tostring = (void *)ft_strtolower((char *)f->tostring);
+	if (f->tostring == NULL)
+		f->tostring = (void *)ft_strdup("(null)");
+	ft_set_len(f);
 }
