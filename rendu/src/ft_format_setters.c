@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/16 19:06:40 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 15:56:10 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ char		*ft_set_flags(char *c, t_format *f)
 		if (ft_strchr(c, '-'))
 			f->flags[i] = '-';
 		i++;
-		if (ft_strchr(c, '0') && ft_strchr(c, '0') < ft_strchr(c, '.'))
+		if (ft_strchr(c, '0'))
 			f->flags[i] = '0';
 		i++;
 		if (ft_strchr(c, '#'))
@@ -36,6 +36,9 @@ char		*ft_set_flags(char *c, t_format *f)
 			f->flags[i] = ' ';
 		while (*c == '+' || *c == '-' || *c == '0' || *c == '#' || *c == ' ')
 			c++;
+		if ((f->flags[2] == '0' && f->flags[1] == '-') || 
+			(f->preci != -1 && (f->type == 'd' || f->type == 'i' ||	f->type == 'o' || f->type == 'u' || f->type == 'x' || f->type == 'X')))
+			f->flags[2] = -1;
 	}
 	return (c);
 }
@@ -109,9 +112,4 @@ char		*ft_set_type(char *c, t_format *f)
 void		ft_set_len(t_format *f)
 {
 	f->len = ft_strlen((char *)f->tostring);
-}
-
-void		ft_set_tostring(t_format *f, va_list ap)
-{
-	ft_type_tostring(f, ap);
 }

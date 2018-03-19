@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:20:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/17 14:38:59 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 15:55:07 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,22 +18,23 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	t_format	*format_lst;
+	t_format	*f;
 	t_format	*first;
 	int			octet;
 
 	va_start(ap, format);
-	format_lst = ft_parse((char *)format);
-	first = format_lst;
+	f = ft_parse((char *)format);
+	first = f;
 	octet = 0;
-	while (format_lst)
+	while (f)
 	{
-		ft_type_tostring(format_lst, ap);
-		ft_width_tostring(format_lst);
-		ft_preci_tostring(format_lst);
-		ft_putstr((char *)format_lst->tostring);
-		octet += format_lst->len;
-		format_lst = format_lst->next;
+		ft_type_tostring(f, ap);
+		ft_preci_tostring(f);
+		ft_width_tostring(f);
+		ft_flags_tostring(f);
+		ft_putstr((char *)f->tostring);
+		octet += ft_strlen((char *)f->tostring);
+		f = f->next;
 	}
 	//puttformat(first);
 	va_end(ap);

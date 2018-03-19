@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/20 15:16:17 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/18 17:10:29 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 15:54:51 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,7 +44,7 @@ void	ft_width_tostring(t_format *f)
 	tmp_len = f->width - f->len;
 	if (tmp_len > 0)
 	{
-		tmp = ft_strgen(' ', tmp_len);
+		tmp = f->flags[2] == '0' ? ft_strgen('0', tmp_len) : ft_strgen(' ', tmp_len);
 		if (f->flags[1] == '-')
 			f->tostring = (wchar_t *)ft_strjoinfree((char *)f->tostring, (char *)tmp);
 		else
@@ -55,6 +55,27 @@ void	ft_width_tostring(t_format *f)
 
 void	ft_flags_tostring(t_format *f)
 {
+	
+	if (f->flags[0] == '+')
+	{
+		
+		;
+	}
+	else if (f->flags[1] == '-')
+	{;}
+	else if (f->flags[2] == '0')
+	{;}
+	else if (f->flags[3] == '#')
+	{
+		if (f->type == 'o' && *(char *)f->tostring != '0')
+			f->tostring = (void *)ft_strjoinfree(ft_strdup("0"), (char *)f->tostring);
+		else if (f->type == 'x')
+			f->tostring = (void *)ft_strjoinfree(ft_strdup("0x"), (char *)f->tostring);
+		else if (f->type == 'X')
+			f->tostring = (void *)ft_strjoinfree(ft_strdup("0X"), (char *)f->tostring);
+	}
+	else if (f->flags[4] == ' ')
+	{;}
 	(void)f;
 }
 

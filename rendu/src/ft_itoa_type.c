@@ -6,14 +6,24 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 13:45:08 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/18 17:07:36 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/18 20:03:31 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_intlen(intmax_t x, int base)
+static int	ft_intlen_base(intmax_t x, int base)
+{
+	int len;
+
+	len = 1;
+	while (x /= base)
+		len++;
+	return (len);
+}
+
+static int	ft_uintlen_base(uintmax_t x, int base)
 {
 	int len;
 
@@ -45,7 +55,7 @@ char		*ft_intmax_itoa_type(intmax_t n, char t)
 		base = 10;
 	neg = (n < 0);
 	n = neg ? -n : n;
-	ret_size = ft_intlen(n, base) + neg;
+	ret_size = ft_intlen_base(n, base) + neg;
 	if (!(ret = ft_strnew(ret_size)))
 		return (NULL);
 	while (ret_size > 0)
@@ -70,7 +80,7 @@ char		*ft_uintmax_itoa_type(uintmax_t n, char t)
 		base = 16;
 	else
 		base = 10;
-	ret_size = ft_intlen(n, base);
+	ret_size = ft_uintlen_base(n, base);
 	if (!(ret = ft_strnew(ret_size)))
 		return (NULL);
 	while (ret_size > 0)

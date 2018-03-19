@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/17 20:12:19 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/18 23:12:18 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ typedef struct	s_format
 	int					preci;		// .x
 	int					size;		//	hh h l ll j z
 	char				type;		//	s S p d D i o O u U x X c C
-	void				*tostring;	//	chaine basique
+	void				*tostring;	//	chaine de sortie
 	int					len;		//	ft_strlen()
 
 }				t_format;
@@ -68,6 +68,7 @@ void		ft_set_tostring(t_format *f, va_list ap);
 void		ft_preci_tostring(t_format *f);
 void		ft_type_tostring(t_format *f, va_list ap);
 void		ft_width_tostring(t_format *f);
+void		ft_flags_tostring(t_format *f);
 // asupprimer.c
 void	puttformat(t_format *f);
 
