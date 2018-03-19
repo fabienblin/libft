@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/20 15:16:17 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/19 15:54:51 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 17:46:51 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 void	ft_preci_tostring(t_format *f)
 {
-	wchar_t	*tmp;
+	char	*tmp;
 	int		tmp_len;
 
 	if (f->preci != -1)
@@ -23,13 +23,13 @@ void	ft_preci_tostring(t_format *f)
 		tmp_len = f->preci - f->len;
 		if ((f->type == 's' || f->type == 'S') && f->preci < f->len)
 		{
-			f->tostring = (wchar_t *)ft_strrealloc((char **)&f->tostring, f->preci);
+			f->tostring = ft_strrealloc(&f->tostring, f->preci);
 			f->len = f->preci;
 		}
 		else if (!(f->type == 's' || f->type == 'S') && f->preci > f->len)
 		{
 			tmp = ft_strgen('0', tmp_len);
-			f->tostring = (wchar_t *)ft_strjoinfree( (char *)tmp, (char *)f->tostring);
+			f->tostring = ft_strjoinfree(tmp, (char *)f->tostring);
 			f->len += tmp_len;
 		}
 	}
@@ -37,7 +37,7 @@ void	ft_preci_tostring(t_format *f)
 
 void	ft_width_tostring(t_format *f)
 {
-	wchar_t	*tmp;
+	char	*tmp;
 	int		tmp_len;
 	
 	tmp = NULL;
@@ -46,9 +46,14 @@ void	ft_width_tostring(t_format *f)
 	{
 		tmp = f->flags[2] == '0' ? ft_strgen('0', tmp_len) : ft_strgen(' ', tmp_len);
 		if (f->flags[1] == '-')
-			f->tostring = (wchar_t *)ft_strjoinfree((char *)f->tostring, (char *)tmp);
+			f->tostring = ft_strjoinfree((char *)f->tostring, tmp);
+		else if (f->flags[0] == '+')
+		{
+			tmp[tmp_len - 1] = '+';
+			f->tostring = ft_strjoinfree(tmp, (char *)f->tostring);
+		}
 		else
-			f->tostring = (wchar_t *)ft_strjoinfree((char *)tmp, (char *)f->tostring);
+			f->tostring = ft_strjoinfree(tmp, (char *)f->tostring);
 		f->len += tmp_len;
 	}
 }
@@ -57,22 +62,19 @@ void	ft_flags_tostring(t_format *f)
 {
 	
 	if (f->flags[0] == '+')
-	{
-		
-		;
-	}
+	{;}
 	else if (f->flags[1] == '-')
 	{;}
 	else if (f->flags[2] == '0')
 	{;}
 	else if (f->flags[3] == '#')
 	{
-		if (f->type == 'o' && *(char *)f->tostring != '0')
-			f->tostring = (void *)ft_strjoinfree(ft_strdup("0"), (char *)f->tostring);
+		if (f->type == 'o' && *f->tostring != '0')
+			f->tostring = ft_strjoinfree(ft_strdup("0"), f->tostring);
 		else if (f->type == 'x')
-			f->tostring = (void *)ft_strjoinfree(ft_strdup("0x"), (char *)f->tostring);
+			f->tostring = ft_strjoinfree(ft_strdup("0x"), f->tostring);
 		else if (f->type == 'X')
-			f->tostring = (void *)ft_strjoinfree(ft_strdup("0X"), (char *)f->tostring);
+			f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
 	}
 	else if (f->flags[4] == ' ')
 	{;}

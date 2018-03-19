@@ -6,12 +6,28 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/19 15:56:10 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 18:54:39 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char	*ft_find_flag_zero(char *c)
+{
+	if (c && *c)
+	{
+		while (*c)
+		{
+			if (ft_isdigit(*c) && *c != '0')
+				return (NULL);
+			else if (*c == '0')
+				return (c);
+			c++;
+		}
+	}
+	return (NULL);
+}
 
 char		*ft_set_flags(char *c, t_format *f)
 {
@@ -26,7 +42,7 @@ char		*ft_set_flags(char *c, t_format *f)
 		if (ft_strchr(c, '-'))
 			f->flags[i] = '-';
 		i++;
-		if (ft_strchr(c, '0'))
+		if (ft_find_flag_zero(c))
 			f->flags[i] = '0';
 		i++;
 		if (ft_strchr(c, '#'))
@@ -36,8 +52,10 @@ char		*ft_set_flags(char *c, t_format *f)
 			f->flags[i] = ' ';
 		while (*c == '+' || *c == '-' || *c == '0' || *c == '#' || *c == ' ')
 			c++;
-		if ((f->flags[2] == '0' && f->flags[1] == '-') || 
-			(f->preci != -1 && (f->type == 'd' || f->type == 'i' ||	f->type == 'o' || f->type == 'u' || f->type == 'x' || f->type == 'X')))
+		// rajouter les surcharges de flags
+		if (f->flags[0] == '+' && f->flags[4] == ' ')
+			f->flags[4] = -1;
+		if (f->flags[2] == '0' && f->flags[1] == '-')
 			f->flags[2] = -1;
 	}
 	return (c);
