@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 13:45:08 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/18 20:03:31 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 20:18:48 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,6 +47,11 @@ char		*ft_intmax_itoa_type(intmax_t n, char t)
 	int		base;
 	int		neg;
 
+	if (n < -9223372036854775807)
+	{
+		ret = ft_strjoinfree(ft_strdup("-"), ft_uintmax_itoa_type(n, t));
+		return (ret);
+	}
 	if (t == 'o' || t == 'O')
 		base = 8;
 	else if (t == 'x' || t == 'X')

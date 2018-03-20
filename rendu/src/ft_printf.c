@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:20:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/19 15:55:07 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 21:57:31 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,8 @@ int	ft_printf(const char *format, ...)
 		ft_preci_tostring(f);
 		ft_width_tostring(f);
 		ft_flags_tostring(f);
+		if (f->type == 'x' || f->type == 'p')
+			f->tostring = (void *)ft_strtolower((char *)f->tostring);
 		ft_putstr((char *)f->tostring);
 		octet += ft_strlen((char *)f->tostring);
 		f = f->next;
