@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/20 15:16:17 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/20 13:56:39 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/20 18:48:06 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,36 +35,75 @@ void	ft_preci_tostring(t_format *f)
 	}
 }
 
-void	ft_width_tostring(t_format *f)
+void	ft_flag_hashtag_tostring(t_format *f)
 {
 	char	*tmp;
 	int		tmp_len;
 	
 	tmp = NULL;
 	tmp_len = f->width - ft_strlen(f->tostring);
+	if (f->flags[3] == '#' && (f->type == 'x' || f->type == 'X') && *f->tostring != '0')
+	{
+		if (tmp_len > 0 && f->flags[2] == '0')
+		{
+			char *tmp = ft_strgen('0', tmp_len);
+			tmp[1] = 'X';
+			f->tostring = ft_strjoinfree(tmp, f->tostring);
+		}
+		else if (tmp_len > 2 && f->flags[1] == '-')
+		{
+			tmp_len -= 2;
+			char *tmp = ft_strgen(' ', tmp_len);
+			f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
+			f->tostring = ft_strjoinfree(f->tostring, tmp);
+		}
+		else
+			f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
+	}
+	else if (f->flags[3] == '#' && f->type == 'o' && *f->tostring != '0')
+	{
+		f->tostring = ft_strjoinfree(ft_strdup("0"), f->tostring);
+	}
+}
+
+void	ft_flag_plus_tostring(t_format *f)
+{
+	if (!ft_strchr(f->tostring, '-') && (f->type == 'd' || f->type == 'D' || f->type == 'i') && f->flags[0] == '+')
+	{
+		f->tostring = ft_strjoinfree(ft_strdup("+"), f->tostring);
+	}
+}
+
+void	ft_width_tostring(t_format *f)
+{
+	char	*tmp;
+	int		tmp_len;
+	
+	tmp = NULL;
+	ft_flag_plus_tostring(f);
+	ft_flag_hashtag_tostring(f);
+	
+	tmp_len = f->width - ft_strlen(f->tostring);
 	if (tmp_len > 0)
 	{
 		tmp = f->flags[2] == '0' ? ft_strgen('0', tmp_len) : ft_strgen(' ', tmp_len);
-		if (f->flags[3] == '#')
-		{
-			if (f->type == 'o' && *f->tostring != '0')
-				tmp[tmp_len - 1] = '0';
-			else if ((f->type == 'x' || f->type == 'X') && (f->flags[1] != '-' && f->flags[2] != '0'))
-			{
-				tmp[tmp_len - 2] = '0';
-				tmp[tmp_len - 1] = 'x';
-			}
-		}
 		if (f->flags[1] == '-')
 			f->tostring = ft_strjoinfree((char *)f->tostring, tmp);
-		else if (f->flags[0] == '+')
-		{
-			tmp[tmp_len - 1] = '+';
-			f->tostring = ft_strjoinfree(tmp, (char *)f->tostring);
-		}
 		else
 			f->tostring = ft_strjoinfree(tmp, (char *)f->tostring);
 		f->len += tmp_len;
+	}
+	char *p;
+	if ((p = ft_strchr(f->tostring, '+')) && (p[-1] == '0') && (f->type == 'd' || f->type == 'D' || f->type == 'i'))
+	{
+		f->tostring[0] = '+';
+		*p = '0';
+	}
+	char *m = ft_strchr(f->tostring, '-');
+	if ((m = ft_strchr(f->tostring, '-')) && (m[-1] == '0') && (f->type == 'd' || f->type == 'D' || f->type == 'i'))
+	{
+		f->tostring[0] = '-';
+		*m = '0';
 	}
 }
 
