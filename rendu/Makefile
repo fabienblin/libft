@@ -6,7 +6,7 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/03/18 15:42:13 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/13 12:42:56 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -61,8 +61,8 @@ fclean	:
 re		:	fclean all
 
 debug	:
-			gcc -ggdb ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && lldb ft_printf
+			gcc -ggdb ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && lldb -d ft_printf
 test	:
-			gcc ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && ./ft_printf
+			gcc ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && ./ft_printf | cat -ve
 
 .PHONY	:	all clean fclean re debug libft

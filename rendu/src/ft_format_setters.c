@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/20 13:37:12 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/09 14:02:06 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -125,9 +125,4 @@ char		*ft_set_type(char *c, t_format *f)
 	else
 	 	f->type = 0;
 	return (c);
-}
-
-void		ft_set_len(t_format *f)
-{
-	f->len = ft_strlen((char *)f->tostring);
 }

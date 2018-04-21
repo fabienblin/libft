@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/19 17:42:45 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/12 14:45:58 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,8 +40,7 @@ typedef struct	s_format
 	int					size;		//	hh h l ll j z
 	char				type;		//	s S p d D i o O u U x X c C
 	char				*tostring;	//	chaine de sortie
-	int					len;		//	ft_strlen()
-
+	void				*arg;		//	ap
 }				t_format;
 
 // misc
@@ -53,7 +52,7 @@ char		*ft_intmax_itoa_type(intmax_t n, char t);
 char		*ft_ptoa(void *p);
 char		*ft_strgen(int c, int len);
 void		ft_del_format_lst(t_format *f);
-void		ft_puttostring(t_format *f);
+void		ft_putwstr_fd(wchar_t *str, int fd);
 
 // ft_format_setters.c
 char		*ft_set_flags(char *c, t_format *f);
@@ -61,7 +60,6 @@ char		*ft_set_width(char *c, t_format *f);
 char		*ft_set_preci(char *c, t_format *f);
 char		*ft_set_size(char *c, t_format *f);
 char		*ft_set_type(char *c, t_format *f);
-void		ft_set_len(t_format *f);
 void		ft_set_tostring(t_format *f, va_list ap);
 
 // ft_tostring.c
