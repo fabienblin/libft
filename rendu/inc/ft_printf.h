@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/12 14:45:58 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/23 17:24:37 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,7 @@
 # include <inttypes.h>
 # include <wchar.h>
 # include <locale.h>
+# include <stdlib.h>
 
 # include "libft.h"
 
@@ -41,6 +42,7 @@ typedef struct	s_format
 	char				type;		//	s S p d D i o O u U x X c C
 	char				*tostring;	//	chaine de sortie
 	void				*arg;		//	ap
+	char				*form;		// "% ls"
 }				t_format;
 
 // misc
@@ -53,6 +55,7 @@ char		*ft_ptoa(void *p);
 char		*ft_strgen(int c, int len);
 void		ft_del_format_lst(t_format *f);
 void		ft_putwstr_fd(wchar_t *str, int fd);
+int			ft_checkstr(t_format *f);
 
 // ft_format_setters.c
 char		*ft_set_flags(char *c, t_format *f);
@@ -64,7 +67,7 @@ void		ft_set_tostring(t_format *f, va_list ap);
 
 // ft_tostring.c
 void		ft_preci_tostring(t_format *f);
-void		ft_type_tostring(t_format *f, va_list ap);
+int			ft_type_tostring(t_format *f, va_list ap);
 void		ft_width_tostring(t_format *f);
 void		ft_flags_tostring(t_format *f);
 // asupprimer.c

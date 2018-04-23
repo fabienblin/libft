@@ -6,7 +6,7 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/04/13 12:42:56 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/22 17:44:03 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -23,7 +23,8 @@ LIB_DIR	=	./libft/
 
 CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
 			ft_format_setters.c	ft_tostring.c		ft_itoa_type.c		\
-			ft_ptoa.c			ft_strgen.c			ft_puttostring.c
+			ft_ptoa.c			ft_strgen.c			ft_puttostring.c	\
+			ft_checkstr.c 
 			
 
 OFILES	=	$(CFILES:.c=.o)

@@ -6,14 +6,12 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 13:09:01 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/17 17:18:44 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/23 17:22:37 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
 
 t_format	*ft_new_format(char *substr)
 {
@@ -27,6 +25,7 @@ t_format	*ft_new_format(char *substr)
 	if (substr && *substr == '%')
 	{
 		c = substr + 1;
+		new_format->form = ft_strdup(c);
 		c = ft_set_flags(c, new_format);
 		c = ft_set_width(c, new_format);
 		c = ft_set_preci(c, new_format);
@@ -34,6 +33,6 @@ t_format	*ft_new_format(char *substr)
 		c = ft_set_type(c, new_format);
 	}
 	else if (substr && *substr != '%')
-		new_format->tostring = (void *)ft_strdup(substr);
+		new_format->tostring = ft_strdup(substr);
 	return (new_format);
 }

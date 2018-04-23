@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_checkstr.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/10 11:25:44 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/23 17:34:42 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/04/22 14:57:44 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/22 17:44:14 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "rendu/inc/ft_printf.h"
+#include "ft_printf.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
-
-
-int main (int argc, char **argv)
+int	ft_checkstr(t_format *f)
 {
-/*	if (argc != 2)
+	while (f)
 	{
-		printf("Usage : %s format", argv[0]);
+		while (*f->tostring)
+		{
+			//55296 a 57343
+			//1101 1000 0000 0000 a 1101 1111 1111 1111
+			//1011 1000 1011 01100 1000 0000 a 1011 1000 10
+			if (*(wchar_t *)f->arg >= 0xd800 && *(wchar_t *)f->arg <= 0xdfff)
+				return (0);
+			f->tostring++;
+		}
+		f = f->next;
 	}
-	
-*/	//setlocale(LC_ALL, "");
-	(void)argc;
-	(void)argv;
-// a faire :
-// %010p
-// %c = 0
-
-ft_printf("%S\n", L"ݗݜशব");
-ft_printf("%C\n", 15000);
-
-	return (0);
+	return(1);
 }

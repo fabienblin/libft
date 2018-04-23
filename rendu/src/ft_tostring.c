@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/20 15:16:17 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/21 17:47:26 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/23 17:31:42 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,7 +45,7 @@ void	ft_flag_hashtag_tostring(t_format *f)
 
 	tmp = NULL;
 	tmp_len = f->width - ft_strlen(f->tostring);
-	if (*f->tostring && f->flags[3] == '#' && (f->type == 'x' || f->type == 'X') && *f->tostring != '0')
+	if (f->tostring && *f->tostring && f->flags[3] == '#' && (f->type == 'x' || f->type == 'X') && *f->tostring != '0')
 	{
 		if (tmp_len > 0 && f->flags[2] == '0')
 		{
@@ -63,7 +63,7 @@ void	ft_flag_hashtag_tostring(t_format *f)
 		else
 			f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
 	}
-	else if (f->flags[3] == '#' && f->type == 'o' && *f->tostring != '0')
+	else if (f->tostring && f->flags[3] == '#' && f->type == 'o' && *f->tostring != '0')
 	{
 		f->tostring = ft_strjoinfree(ft_strdup("0"), f->tostring);
 	}
@@ -164,14 +164,16 @@ char	*ft_convert_wstr_to_str(wchar_t *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] <= 0x7F)
+		if (str[i] <= 0x7F && MB_CUR_MAX == 1)
 			new_len += 1;
-		else if (str[i] <= 0x7FF)
+		else if (str[i] <= 0x7FF && MB_CUR_MAX == 2)
 			new_len += 2;
-		else if (str[i] <= 0xFFFF)
+		else if (str[i] <= 0xFFFF && MB_CUR_MAX == 3)
 			new_len += 3;
-		else if (str[i] <= 0x10FFFF)
+		else if (str[i] <= 0x10FFFF && MB_CUR_MAX == 4)
 			new_len += 4;
+		else
+			return (NULL);
 		i++;
 	}
 	
@@ -180,41 +182,44 @@ char	*ft_convert_wstr_to_str(wchar_t *str)
 	i = 0;
 	while(str[i])
 	{
-		if (str[i] <= 0x7F)
+		if (str[i] <= 0x7F && MB_CUR_MAX == 1)
 		{
 			new[i] = str[i];
 		}
-	    else if (str[i] <= 0x7FF)
+	    else if (str[i] <= 0x7FF && MB_CUR_MAX == 2)
 	    {
 			new[i] = (str[i] >> 6) + 0xC0;
 			new[i + 1] = (str[i] & 0x3F) + 0x80;
 	    }
-	    else if (str[i] <= 0xFFFF)
+	    else if (str[i] <= 0xFFFF && MB_CUR_MAX == 3)
 	    {
 			new[i] = (str[i] >> 12) + 0xE0;
 			new[i + 1] = ((str[i] >> 6) & 0x3F) + 0x80;
 			new[i + 2] = (str[i] & 0x3F) + 0x80;
 	    }
-	    else if (str[i] <= 0x10FFFF)
+	    else if (str[i] <= 0x10FFFF && MB_CUR_MAX == 4)
 	    {
 			new[i] = (str[i] >> 18) + 0xF0;
 			new[i + 1] = ((str[i] >> 12) & 0x3F) + 0x80;
 			new[i + 2] = ((str[i] >> 6) & 0x3F) + 0x80;
 			new[i + 3] = (str[i] & 0x3F) + 0x80;
 	    }
+		else
+			return (NULL);
 		i++;
 	}
 	return (new);
 }
 
-void	ft_type_s_tostring(t_format *f, va_list ap)
+int	ft_type_s_tostring(t_format *f, va_list ap)
 {
 	wchar_t *tmp;
 	
 	if ((f->type == 's' && f->size == L) || f->type == 'S')
 	{
 		tmp = va_arg(ap, wchar_t *);
-		f->tostring = ft_convert_wstr_to_str(tmp);
+		if (!(f->tostring = ft_convert_wstr_to_str(tmp)))
+			return (-1);
 		f->arg = ft_strdup(f->tostring);
 	}
 	else
@@ -224,9 +229,10 @@ void	ft_type_s_tostring(t_format *f, va_list ap)
 	}
 	if (!f->arg)
 		f->tostring = ft_strdup("(null)");
+	return (1);
 }
 
-void	ft_type_c_tostring(t_format *f, va_list ap)
+int	ft_type_c_tostring(t_format *f, va_list ap)
 {
 	wchar_t tmp[2];
 
@@ -234,7 +240,8 @@ void	ft_type_c_tostring(t_format *f, va_list ap)
 	{
 		tmp[0] = va_arg(ap, wchar_t);
 		tmp[1] = 0;
-		f->tostring = ft_convert_wstr_to_str((wchar_t *)tmp);
+		if (!(f->tostring = ft_convert_wstr_to_str((wchar_t *)tmp)))
+			return (-1);
 	}
 	else
 	{
@@ -242,6 +249,7 @@ void	ft_type_c_tostring(t_format *f, va_list ap)
 		*(int *)f->tostring = va_arg(ap, int);
 	}
 	f->arg = f->tostring[0] ? ft_strdup(f->tostring) : NULL;
+	return (1);
 }
 
 void	ft_type_p_tostring(t_format *f, va_list ap)
@@ -316,14 +324,17 @@ void	ft_type_exceptions(t_format *f)
 		ft_strrealloc(&f->tostring, 0);
 }
 
-void	ft_type_tostring(t_format *f, va_list ap)
+int		ft_type_tostring(t_format *f, va_list ap)
 {
 	char	t;
 
 	if ((t = f->type))
 	{
 		if (t == 's' || t == 'S')
-			ft_type_s_tostring(f, ap);
+		{
+			if (ft_type_s_tostring(f, ap) == -1)
+				return (-1);
+		}	
 		else if (t == 'p')
 			ft_type_p_tostring(f, ap);
 		else if (t == 'd' || t == 'D' || t == 'i')
@@ -331,10 +342,14 @@ void	ft_type_tostring(t_format *f, va_list ap)
 		else if (t == 'o' || t == 'O' || t == 'u' || t == 'U' || t == 'x' || t == 'X')
 			ft_type_uox_tostring(f, ap);
 		else if (t == 'c' || t == 'C')
-			ft_type_c_tostring(f, ap);
+		{
+			if (ft_type_c_tostring(f, ap) == -1)
+				return (-1);
+		}
 		else if (t == '%')
 			f->tostring = ft_strdup("%");
 		ft_type_exceptions(f);
 	}
+	return (1);
 }
 
