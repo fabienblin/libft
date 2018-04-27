@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 11:27:02 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/13 12:38:13 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/27 17:18:12 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,7 +61,7 @@ t_format	*ft_parse(char *format)
 		if (*begin == '%')
 		{
 			if (!(end = ft_find_type(begin)))
-				end = ++begin;
+				end = begin + ft_strlen(begin);
 		}
 		else if (tmp == NULL)
 			end = begin + ft_strlen(begin);

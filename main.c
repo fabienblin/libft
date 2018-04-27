@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/10 11:25:44 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/23 17:34:42 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/27 16:41:22 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,15 +25,20 @@ int main (int argc, char **argv)
 		printf("Usage : %s format", argv[0]);
 	}
 	
-*/	//setlocale(LC_ALL, "");
+*/	setlocale(LC_ALL, "");
 	(void)argc;
 	(void)argv;
 // a faire :
 // %010p
-// %c = 0
 
-ft_printf("%S\n", L"ݗݜशব");
-ft_printf("%C\n", 15000);
-
+	int a = printf("   printf = {%10R}\n");
+	int b = ft_printf("ft_printf = {%10R}\n");
+	if (a == b)
+		printf("OK\n");
+	else
+	{
+		printf("printf = %d, ft_printf = %d\n", a, b);
+		printf("ERROR\n");
+	}
 	return (0);
 }

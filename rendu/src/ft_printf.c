@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:20:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/23 17:34:30 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/27 17:29:27 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,8 +34,8 @@ int	ft_printf(const char *format, ...)
 			return (-1);
 		}
 		ft_preci_tostring(f);
+		ft_flags_tostring(f);
 		ft_width_tostring(f);
-		//ft_flags_tostring(f);
 		f = f->next;
 	}
 	f = first;
@@ -49,10 +49,12 @@ int	ft_printf(const char *format, ...)
 			char *print = f->form;
 			while (*print == ' ')
 				print++;
-			ft_putstr(print);
+			ft_putstr_fd(print, 1);
+			octet += ft_strlen(print);
 		}
 		else
-			ft_putstr(f->tostring);
+			ft_putstr_fd(f->tostring, 1);
+		//cas particulier avec "%c", 0
 		if ((f->type == 'c' || f->type == 'C') && f->arg == NULL)
 		{
 			ft_putchar_fd(0, 1);
