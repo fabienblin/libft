@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/23 17:24:37 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/28 15:27:55 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,8 +54,9 @@ char		*ft_intmax_itoa_type(intmax_t n, char t);
 char		*ft_ptoa(void *p);
 char		*ft_strgen(int c, int len);
 void		ft_del_format_lst(t_format *f);
-void		ft_putwstr_fd(wchar_t *str, int fd);
-int			ft_checkstr(t_format *f);
+int			ft_puttostring_fd(t_format *f, int fd);
+int			ft_convert_wstr_to_str(char **dst, wchar_t *wstr);
+int			ft_setformat(t_format *f, va_list ap);
 
 // ft_format_setters.c
 char		*ft_set_flags(char *c, t_format *f);
@@ -71,6 +72,6 @@ int			ft_type_tostring(t_format *f, va_list ap);
 void		ft_width_tostring(t_format *f);
 void		ft_flags_tostring(t_format *f);
 // asupprimer.c
-void	puttformat(t_format *f);
+void		puttformat(t_format *f);
 
 #endif

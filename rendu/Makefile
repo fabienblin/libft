@@ -6,7 +6,7 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/04/22 17:44:03 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/28 15:15:41 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,9 +22,10 @@ INC_DIR =	./inc/
 LIB_DIR	=	./libft/
 
 CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
-			ft_format_setters.c	ft_tostring.c		ft_itoa_type.c		\
-			ft_ptoa.c			ft_strgen.c			ft_puttostring.c	\
-			ft_checkstr.c 
+			ft_format_setters.c	ft_tostring.c		ft_itoa_type.c			\
+			ft_ptoa.c			ft_strgen.c			ft_puttostring.c		\
+			ft_unicode.c		ft_type_tostring.c	ft_width_tostring		\
+			ft_preci_tostring.c	ft_flags_tostring.c
 			
 
 OFILES	=	$(CFILES:.c=.o)
@@ -37,17 +38,17 @@ FLAGS	=	-Wall -Wextra -Werror
 
 all		:	$(NAME)
 
-$(NAME)	:	mkdir_obj libft $(OBJECTS)
+$(NAME)	:	./libft/libft.a $(OBJ_DIR) $(OBJECTS)
 			ar rcs $(NAME) $(OBJECTS) ./libft/obj/*.o
 			@echo "===> LIBFTPRINTF.A HAS BEEN COMPILED <==="
 
 $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(INC_DIR)ft_printf.h ./libft/inc/libft.h
 					gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR) -I ./libft/inc/
 
-mkdir_obj	:
+./obj/	:
 				mkdir -p $(OBJ_DIR)
 
-libft	:
+./libft/libft.a	:
 			make -C $(LIB_DIR)
 
 clean	:
@@ -66,4 +67,4 @@ debug	:
 test	:
 			gcc ../main.c src/* libft/libft.a -I libft/inc -I inc/ -o ft_printf && ./ft_printf | cat -ve
 
-.PHONY	:	all clean fclean re debug libft
+.PHONY	:	all clean fclean re debug 

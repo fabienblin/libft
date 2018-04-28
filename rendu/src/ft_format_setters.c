@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/27 17:22:22 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/28 15:32:52 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,15 @@ char	*ft_find_flag_zero(char *c)
 	return (NULL);
 }
 
-char		*ft_set_flags(char *c, t_format *f)
+void	ft_override_flags(t_format *f)
+{
+	if (f->flags[0] == '+' && f->flags[4] == ' ')
+		f->flags[4] = -1;
+	if (f->flags[2] == '0' && f->flags[1] == '-')
+		f->flags[2] = -1;
+}
+
+char	*ft_set_flags(char *c, t_format *f)
 {
 	int		i;
 
@@ -52,16 +60,12 @@ char		*ft_set_flags(char *c, t_format *f)
 			f->flags[i] = ' ';
 		while (*c == '+' || *c == '-' || *c == '0' || *c == '#' || *c == ' ')
 			c++;
-		// rajouter les surcharges de flags
-		if (f->flags[0] == '+' && f->flags[4] == ' ')
-			f->flags[4] = -1;
-		if (f->flags[2] == '0' && f->flags[1] == '-')
-			f->flags[2] = -1;
+		ft_override_flags(f);
 	}
 	return (c);
 }
 
-char		*ft_set_width(char *c, t_format *f)
+char	*ft_set_width(char *c, t_format *f)
 {
 	if (ft_isdigit(*c))
 	{
@@ -72,7 +76,7 @@ char		*ft_set_width(char *c, t_format *f)
 	return (c);
 }
 
-char		*ft_set_preci(char *c, t_format *f)
+char	*ft_set_preci(char *c, t_format *f)
 {
 	if (c && *c == '.')
 	{
@@ -91,7 +95,7 @@ char		*ft_set_preci(char *c, t_format *f)
 	return (c);
 }
 
-char		*ft_set_size(char *c, t_format *f)
+char	*ft_set_size(char *c, t_format *f)
 {
 	if (*c == 'h' || *c == 'l' || *c == 'j' || *c == 'z')
 	{
@@ -113,7 +117,7 @@ char		*ft_set_size(char *c, t_format *f)
 	return (c);
 }
 
-char		*ft_set_type(char *c, t_format *f)
+char	*ft_set_type(char *c, t_format *f)
 {
 	if (*c == 's' || *c == 'S' || *c == 'p' || *c == 'd' || *c == 'D' ||
 		*c == 'i' || *c == 'o' || *c == 'O' || *c == 'u' || *c == 'U' ||
@@ -125,4 +129,24 @@ char		*ft_set_type(char *c, t_format *f)
 	else
 	 	f->type = 0;
 	return (c);
+}
+
+int		ft_setformat(t_format *f, va_list ap)
+{
+	t_format	*first;
+
+	first = f;
+	while (f)
+	{
+		if (ft_type_tostring(f, ap) == -1)
+		{
+			ft_del_format_lst(first);
+			return (-1);
+		}
+		ft_preci_tostring(f);
+		ft_flags_tostring(f);
+		ft_width_tostring(f);
+		f = f->next;
+	}
+	return (0);
 }
