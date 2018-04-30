@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/28 15:27:55 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/28 16:26:26 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,6 @@ char		*ft_strgen(int c, int len);
 void		ft_del_format_lst(t_format *f);
 int			ft_puttostring_fd(t_format *f, int fd);
 int			ft_convert_wstr_to_str(char **dst, wchar_t *wstr);
-int			ft_setformat(t_format *f, va_list ap);
 
 // ft_format_setters.c
 char		*ft_set_flags(char *c, t_format *f);

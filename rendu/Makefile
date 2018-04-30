@@ -6,7 +6,7 @@
 #    By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:09:41 by fablin       #+#   ##    ##    #+#        #
-#    Updated: 2018/04/28 15:15:41 by fablin      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/28 15:48:01 by fablin      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,9 +22,9 @@ INC_DIR =	./inc/
 LIB_DIR	=	./libft/
 
 CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
-			ft_format_setters.c	ft_tostring.c		ft_itoa_type.c			\
+			ft_format_setters.c			ft_itoa_type.c			\
 			ft_ptoa.c			ft_strgen.c			ft_puttostring.c		\
-			ft_unicode.c		ft_type_tostring.c	ft_width_tostring		\
+			ft_unicode.c		ft_type_tostring.c	ft_width_tostring.c		\
 			ft_preci_tostring.c	ft_flags_tostring.c
 			
 
