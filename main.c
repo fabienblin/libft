@@ -25,13 +25,13 @@ int main (int argc, char **argv)
 		printf("Usage : %s format", argv[0]);
 	}
 	
-*/	//setlocale(LC_ALL, "");
+*/	setlocale(LC_ALL, "");
 	(void)argc;
 	(void)argv;
 // a faire :
 
-	int a = printf("   printf = %.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
-	int b = ft_printf("ft_printf = %.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	int a = printf("   printf = %S\n", L"����");
+	int b = ft_printf("ft_printf = %S\n", L"����");
 	if (a == b)
 		printf("OK\n");
 	else
