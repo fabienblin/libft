@@ -27,6 +27,8 @@ char	*ft_find_type(char *str)
 			*type == 'u' || *type == 'U' || *type == 'x' || *type == 'X' ||
 			*type == 'c' || *type == 'C' || *type == '%')
 			return (type + 1);
+		else if (ft_isalpha((int)*type) && !(*type == 'h' || *type == 'l' || *type == 'j' || *type == 'z'))
+			return(type + 1);
 		type++;
 	}
 	return (NULL);

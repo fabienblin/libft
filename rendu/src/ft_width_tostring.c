@@ -39,7 +39,6 @@ void	ft_width_tostring(t_format *f)
 
 	width = NULL;
 	width_len = f->width - ft_strlen(f->tostring);
-	
 	if ((f->type == 'c' || f->type == 'C') && f->arg == NULL)
 		width_len--;
 	if (width_len > 0)

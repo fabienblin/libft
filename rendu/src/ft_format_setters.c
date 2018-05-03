@@ -84,11 +84,11 @@ char	*ft_set_preci(char *c, t_format *f)
 		if (ft_isdigit(*c) || *c == '+' || *c == '-')
 		{
 			f->preci = ft_atoi(c);
-			if (*c == '+' || *c == '-')
-				c++;
-			while(ft_isdigit(*c))
+			while(ft_isdigit(*c) || *c == '+' || *c == '-')
 				c++;
 		}
+		else
+			f->preci = 0;
 	}
 	else
 		f->preci = -1;

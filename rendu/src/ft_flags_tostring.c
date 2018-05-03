@@ -12,50 +12,16 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-void	ft_flag_hashtag_tostring(t_format *f)
-{
-	char	*tmp;
-	int		tmp_len;
 
-	tmp = NULL;
-	tmp_len = f->width - ft_strlen(f->tostring);
-	if (f->tostring && *f->tostring && f->flags[3] == '#' && (f->type == 'x' || f->type == 'X'))
-	{
-		if (tmp_len > 0 && f->flags[2] == '0')
-		{
-			char *tmp = ft_strgen('0', tmp_len);
-			tmp[1] = 'X';
-			f->tostring = ft_strjoinfree(tmp, f->tostring);
-		}
-		else if (tmp_len > 2 && f->flags[1] == '-')
-		{
-			tmp_len -= 2;
-			char *tmp = ft_strgen(' ', tmp_len);
-			f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
-			f->tostring = ft_strjoinfree(f->tostring, tmp);
-		}
-		else if (ft_strcmp(f->tostring, "0"))
-			f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
-	}
-	else if (f->tostring && f->flags[3] == '#' && (f->type == 'o' || f->type == 'O') && *f->tostring != '0')
-	{
-		f->tostring = ft_strjoinfree(ft_strdup("0"), f->tostring);
-	}
-	if (f->type == 'x' || f->type == 'p')
-		f->tostring = ft_strtolower(f->tostring);
-}
-*/
 void	ft_flag_hashtag_tostring(t_format *f)
 {
 	char	*tmp;
 	
 	tmp = NULL;
 	if ((f->type == 'o' || f->type == 'O') && f->tostring[0] != '0')
-	{
-		f->tostring = ft_strjoinfree(ft_strgen('0', 1), f->tostring);
-	}
-	if ((f->type == 'x' || f->type == 'X') && ft_strcmp(f->arg, "0"))
+		f->tostring = ft_strjoinfree(ft_strdup("0"), f->tostring);
+	else if (((f->type == 'x' || f->type == 'X') && ft_strcmp(f->arg, "0")) ||
+			f->type == 'p')
 	{
 		tmp = ft_strgen('0', 2);
 		tmp[1] = 'X';
@@ -65,7 +31,9 @@ void	ft_flag_hashtag_tostring(t_format *f)
 
 void	ft_flag_plus_tostring(t_format *f)
 {
-	if (!ft_strchr(f->tostring, '-') && (f->type == 'd' || f->type == 'D' || f->type == 'i') && f->flags[0] == '+')
+	if (!ft_strchr(f->tostring, '-') &&
+	(f->type == 'd' || f->type == 'D' || f->type == 'i') &&
+	f->flags[0] == '+')
 	{
 		f->tostring = ft_strjoinfree(ft_strdup("+"), f->tostring);
 	}
@@ -73,10 +41,10 @@ void	ft_flag_plus_tostring(t_format *f)
 
 void	ft_flag_space_tostring(t_format *f)
 {
-	if (!ft_strchr(f->arg, '-') && (f->type == 'd' || f->type == 'D' || f->type == 'i') && f->flags[4] == ' ' && f->tostring[0] != ' ')
-	{
+	if (!ft_strchr(f->arg, '-') &&
+		(f->type == 'd' || f->type == 'D' || f->type == 'i') &&
+		f->flags[4] == ' ' && f->tostring[0] != ' ')
 		f->tostring = ft_strjoinfree(ft_strdup(" "), f->tostring);
-	}
 }
 
 void	ft_flag_zero_tostring(t_format *f)
@@ -87,17 +55,16 @@ void	ft_flag_zero_tostring(t_format *f)
 	tmp_len = f->width - ft_strlen(f->tostring);
 	if (f->width > 0 && f->preci > 0 && f->width > f->preci)
 		tmp_len -= f->width - f->preci;
-	if (f->flags[3] == '#' && ft_strcmp("0", f->arg))
+	if (f->flags[3] == '#' && (ft_strcmp("0", f->arg) || f->type == 'p'))
 		tmp_len -= 2;
+	if (f->flags[4] == ' ' && f->tostring[0] != ' ')
+		tmp_len -= 1;
+	if ((f->type == 'c' || f->type == 'C') && f->arg == 0)
+		tmp_len -= 1;
 	if (tmp_len > 0)
 	{
-		if (f->type == 'd' || f->type == 'D' || f->type == 'i' || f->type == 'o'
-			|| f->type == 'O' || f->type == 'u' || f->type == 'U' ||
-			f->type == 'x' || f->type == 'X')
-		{
-			tmp = ft_strgen('0', tmp_len);
-			f->tostring = ft_strjoinfree(tmp, f->tostring);
-		}
+		tmp = ft_strgen('0', tmp_len);
+		f->tostring = ft_strjoinfree(tmp, f->tostring);
 	}
 }
 

@@ -23,9 +23,11 @@ int	ft_tostring(t_format *f, va_list ap)
 	{
 		if (ft_type_tostring(f, ap) == -1)
 			return (-1);
-		ft_preci_tostring(f);
+		if (f->preci >= 0)
+			ft_preci_tostring(f);
 		ft_flags_tostring(f);
-		ft_width_tostring(f);
+		if (f->width > 0)
+			ft_width_tostring(f);
 		f = f->next;
 	}
 	return (0);

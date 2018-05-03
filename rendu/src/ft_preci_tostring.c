@@ -19,17 +19,15 @@ void	ft_preci_tostring(t_format *f)
 	char	*tmp;
 	int		tmp_len;
 
-	if (f->preci > 0 && !(f->type == 'c' || f->type == 'C'))
+	if (!(f->type == 'c' || f->type == 'C'))
 	{
-		tmp_len = f->preci - ft_strlen(f->tostring);
-		if (f->type == 'p')
-			tmp_len += 2;
 		if ((f->type == 's' || f->type == 'S') && f->preci < (int)ft_strlen(f->tostring))
-		{
 			f->tostring = ft_strrealloc(&f->tostring, f->preci);
-		}
-		else if (!(f->type == 's' || f->type == 'S') && f->preci > (int)ft_strlen(f->tostring))
+		else if (!(f->type == 's' || f->type == 'S') && f->preci >= (int)ft_strlen(f->tostring))
 		{
+			tmp_len = f->preci - ft_strlen(f->tostring);
+			if (f->type == 'p')
+				tmp_len += 2;
 			tmp = ft_strgen('0', tmp_len);
 			if (ft_strchr(f->tostring, '-'))
 			{

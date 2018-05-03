@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/10 11:25:44 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/30 18:16:38 by fablin      ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fablin <fablin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/10 11:25:44 by fablin            #+#    #+#             */
+/*   Updated: 2018/05/02 18:17:28 by fablin           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "rendu/inc/ft_printf.h"
 
@@ -25,13 +25,13 @@ int main (int argc, char **argv)
 		printf("Usage : %s format", argv[0]);
 	}
 	
-*/	setlocale(LC_ALL, "");
+*/	//setlocale(LC_ALL, "");
 	(void)argc;
 	(void)argv;
 // a faire :
 
-	int a = printf("   printf = %.5p\n", 0x33333);
-	int b = ft_printf("ft_printf = %.5p\n", 0x33333);
+	int a = printf("   printf = %.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	int b = ft_printf("ft_printf = %.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
 	if (a == b)
 		printf("OK\n");
 	else

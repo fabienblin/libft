@@ -62,7 +62,8 @@ void	ft_type_p_tostring(t_format *f, va_list ap)
 	if (!(f->tostring = ft_ptoa(va_arg(ap, void *))))
 		f->tostring = ft_strdup("0");
 	f->arg = ft_strdup(f->tostring);
-	f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
+	//f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
+	f->flags[3] = '#';
 }
 
 void	ft_type_di_tostring(t_format *f, va_list ap)
