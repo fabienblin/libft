@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_constuctors.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 13:09:01 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/27 17:58:06 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 18:57:34 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,6 +36,5 @@ t_format	*ft_new_format(char *substr)
 	}
 	else if (substr && *substr != '%')
 		new_format->tostring = ft_strdup(substr);
-
 	return (new_format);
 }

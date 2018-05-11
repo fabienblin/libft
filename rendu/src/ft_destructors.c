@@ -3,14 +3,14 @@
 /*                                                              /             */
 /*   ft_destructors.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 13:08:40 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/23 17:22:50 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 18:58:09 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
- 
+
 #include "ft_printf.h"
 
 void	ft_del_format_lst(t_format *f)

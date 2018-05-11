@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_memccpy.c                                     .::    .:/ .      .::   */
+/*   ft_format_setters_ext.c                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 17:35:25 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/28 17:35:25 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/11 19:01:17 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/11 19:02:29 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+void	ft_override_flags(t_format *f)
 {
-	unsigned char	car;
-	unsigned char	*d;
-	unsigned char	*s;
+	if (f->flags[0] == '+' && f->flags[4] == ' ')
+		f->flags[4] = -1;
+	if (f->flags[2] == '0' && f->flags[1] == '-')
+		f->flags[2] = -1;
+}
 
-	car = (unsigned char)c;
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	if (n)
+char	*ft_find_flag_zero(char *c)
+{
+	if (c && *c)
 	{
-		while (n--)
+		while (*c)
 		{
-			*d = *s;
-			if (*s == car)
-				return ((void *)d + 1);
-			d++;
-			s++;
+			if (ft_isdigit(*c) && *c != '0')
+				return (NULL);
+			else if (*c == '0')
+				return (c);
+			c++;
 		}
 	}
 	return (NULL);

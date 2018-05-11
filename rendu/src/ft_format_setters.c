@@ -3,46 +3,22 @@
 /*                                                              /             */
 /*   ft_format_setters.c                              .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/06 14:36:07 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/28 16:25:19 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 19:02:34 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_find_flag_zero(char *c)
-{
-	if (c && *c)
-	{
-		while (*c)
-		{
-			if (ft_isdigit(*c) && *c != '0')
-				return (NULL);
-			else if (*c == '0')
-				return (c);
-			c++;
-		}
-	}
-	return (NULL);
-}
-
-void	ft_override_flags(t_format *f)
-{
-	if (f->flags[0] == '+' && f->flags[4] == ' ')
-		f->flags[4] = -1;
-	if (f->flags[2] == '0' && f->flags[1] == '-')
-		f->flags[2] = -1;
-}
-
 char	*ft_set_flags(char *c, t_format *f)
 {
 	int		i;
 
 	if (c && f)
-	{		
+	{
 		i = 0;
 		if (ft_strchr(c, '+'))
 			f->flags[i] = '+';
@@ -70,7 +46,7 @@ char	*ft_set_width(char *c, t_format *f)
 	if (ft_isdigit(*c))
 	{
 		f->width = ft_atoi(c);
-		while(ft_isdigit(*c))
+		while (ft_isdigit(*c))
 			c++;
 	}
 	return (c);
@@ -84,7 +60,7 @@ char	*ft_set_preci(char *c, t_format *f)
 		if (ft_isdigit(*c) || *c == '+' || *c == '-')
 		{
 			f->preci = ft_atoi(c);
-			while(ft_isdigit(*c) || *c == '+' || *c == '-')
+			while (ft_isdigit(*c) || *c == '+' || *c == '-')
 				c++;
 		}
 		else
@@ -127,6 +103,6 @@ char	*ft_set_type(char *c, t_format *f)
 		c++;
 	}
 	else
-	 	f->type = 0;
+		f->type = 0;
 	return (c);
 }

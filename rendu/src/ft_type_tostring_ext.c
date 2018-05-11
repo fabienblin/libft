@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_type_tostring.c                               .::    .:/ .      .::   */
+/*   ft_type_tostring_ext.c                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/04/28 13:28:21 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/28 13:28:44 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/11 19:35:08 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/11 19:38:03 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ int		ft_type_s_tostring(t_format *f, va_list ap)
 	if ((f->type == 's' && f->size == L) || f->type == 'S')
 	{
 		tmp = va_arg(ap, wchar_t *);
-		if (ft_convert_wstr_to_str(&f->tostring, tmp) == -1)
+		if (ft_convert_wstr_to_str(&f->tostring, tmp, f->preci) == -1)
 			return (-1);
 		f->arg = ft_strdup(f->tostring);
 	}
@@ -37,7 +37,7 @@ int		ft_type_s_tostring(t_format *f, va_list ap)
 	return (1);
 }
 
-int	ft_type_c_tostring(t_format *f, va_list ap)
+int		ft_type_c_tostring(t_format *f, va_list ap)
 {
 	wchar_t tmp[2];
 
@@ -45,13 +45,14 @@ int	ft_type_c_tostring(t_format *f, va_list ap)
 	{
 		tmp[0] = va_arg(ap, wchar_t);
 		tmp[1] = 0;
-		if (ft_convert_wstr_to_str(&f->tostring, (wchar_t *)tmp) == -1)
+		if (ft_convert_wstr_to_str(&f->tostring,
+			(wchar_t *)tmp, f->preci) == -1)
 			return (-1);
 	}
 	else
 	{
-		f->tostring = ft_strnew(sizeof(int));
-		*(int *)f->tostring = va_arg(ap, int);
+		f->tostring = ft_strnew(sizeof(char));
+		*f->tostring = (char)va_arg(ap, int);
 	}
 	f->arg = f->tostring[0] ? ft_strdup(f->tostring) : NULL;
 	return (1);
@@ -62,7 +63,6 @@ void	ft_type_p_tostring(t_format *f, va_list ap)
 	if (!(f->tostring = ft_ptoa(va_arg(ap, void *))))
 		f->tostring = ft_strdup("0");
 	f->arg = ft_strdup(f->tostring);
-	//f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
 	f->flags[3] = '#';
 }
 
@@ -114,47 +114,4 @@ void	ft_type_uox_tostring(t_format *f, va_list ap)
 		arg = (unsigned int)arg;
 	f->tostring = ft_uintmax_itoa_type(arg, f->type);
 	f->arg = ft_strdup(f->tostring);
-}
-
-void	ft_type_exceptions(t_format *f)
-{
-	int	t;
-	int	c;
-	
-	t = f->type;
-	c = (t == 'd' || t == 'D' || t == 'o' || t == 'O' || t == 'u' || t == 'U' || t == 'x' || t == 'X' || t == 'i');
-	if (ft_strcmp("0", f->tostring) == 0 && f->preci == 0 && c)
-		ft_strrealloc(&f->tostring, 0);
-	c = (t == 'd' || t == 'D' || t == 'u' || t == 'U' || t == 'x' || t == 'X' || t == 'i');
-	if (ft_strcmp("0X", f->tostring) == 0 && f->preci == 0 && c)
-		ft_strrealloc(&f->tostring, 0);
-}
-
-int		ft_type_tostring(t_format *f, va_list ap)
-{
-	char	t;
-
-	if ((t = f->type))
-	{
-		if (t == 'p')
-			ft_type_p_tostring(f, ap);
-		else if (t == 'd' || t == 'D' || t == 'i')
-			ft_type_di_tostring(f, ap);
-		else if (t == 'o' || t == 'O' || t == 'u' || t == 'U' || t == 'x' || t == 'X')
-			ft_type_uox_tostring(f, ap);
-		else if (t == 'c' || t == 'C')
-		{
-			if (ft_type_c_tostring(f, ap) == -1)
-				return (-1);
-		}
-		else if (t == '%')
-			f->tostring = ft_strdup("%");
-		else
-		{
-			if (ft_type_s_tostring(f, ap) == -1)
-				return (-1);
-		}
-		ft_type_exceptions(f);
-	}
-	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/07 17:21:28 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 17:38:12 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 20:30:43 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,8 +30,8 @@ int main (int argc, char **argv)
 	(void)argc;
 	(void)argv;
 		
-	int a = printf("   printf = %.0p, %.p\n", 0, 0) - 13;
-	int b = ft_printf("ft_printf = %.0p, %.p\n", 0, 0) - 13;
+	int a = printf("   printf = %C\n", 0xabc) - 13;
+	int b = ft_printf("ft_printf = %C\n", 0xabc) - 13;
 	if (a == b)
 		printf("OK\n");
 	else

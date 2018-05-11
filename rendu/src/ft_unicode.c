@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 13:28:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 15:14:13 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 20:41:42 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,8 +21,8 @@ int		ft_wstr_unilen_preci(wchar_t *src, int preci)
 	if (!src)
 		return (0);
 	len = 0;
-	i = 0;	
-	while (src[i] && i < preci)
+	i = -1;
+	while (src[++i] && i < preci)
 	{
 		if ((src[i] >= 0xD800 && src[i] <= 0xDFFF) || src[i] < 0 ||
 			(MB_CUR_MAX == 1 && src[i] > 0xFF) || src[i] > 0x10FFFF)
@@ -37,8 +37,7 @@ int		ft_wstr_unilen_preci(wchar_t *src, int preci)
 		else if (src[i] <= 0x10FFFF && MB_CUR_MAX >= 4)
 			len += 4;
 		else
-			break;
-		i++;
+			break ;
 	}
 	return (len);
 }
@@ -51,8 +50,8 @@ int		ft_wstr_unilen(wchar_t *src)
 	if (!src)
 		return (0);
 	len = 0;
-	i = 0;	
-	while (src[i])
+	i = -1;
+	while (src[++i])
 	{
 		if ((src[i] >= 0xD800 && src[i] <= 0xDFFF) || src[i] < 0 ||
 			(MB_CUR_MAX == 1 && src[i] > 0xFF) || src[i] > 0x10FFFF)
@@ -67,47 +66,48 @@ int		ft_wstr_unilen(wchar_t *src)
 		else if (src[i] <= 0x10FFFF && MB_CUR_MAX >= 4)
 			len += 4;
 		else
-			break;
-		i++;
+			break ;
 	}
 	return (len);
 }
 
-int		ft_wstr_unicpy(char *dst, wchar_t *src, int len)
+void	ft_conv(char *dst, wchar_t *src, int *i, int *j)
+{
+	if ((MB_CUR_MAX > 1 && src[*i] <= 0x7F) ||
+		(MB_CUR_MAX == 1 && src[*i] <= 0xFF))
+		dst[(*j)++] = src[*i];
+	else if (src[*i] <= 0x7FF && MB_CUR_MAX >= 2)
+	{
+		dst[(*j)++] = (src[*i] >> 6) + 0xC0;
+		dst[(*j)++] = (src[*i] & 0x3F) + 0x80;
+	}
+	else if (src[*i] <= 0xFFFF && MB_CUR_MAX >= 3)
+	{
+		dst[(*j)++] = (src[*i] >> 12) + 0xE0;
+		dst[(*j)++] = ((src[*i] >> 6) & 0x3F) + 0x80;
+		dst[(*j)++] = (src[*i] & 0x3F) + 0x80;
+	}
+	else if (src[*i] <= 0x10FFFF && MB_CUR_MAX >= 4)
+	{
+		dst[(*j)++] = (src[*i] >> 18) + 0xF0;
+		dst[(*j)++] = ((src[*i] >> 12) & 0x3F) + 0x80;
+		dst[(*j)++] = ((src[*i] >> 6) & 0x3F) + 0x80;
+		dst[(*j)++] = (src[*i] & 0x3F) + 0x80;
+	}
+}
+
+int		ft_wstr_unicpy(char **dst, wchar_t *src, int len)
 {
 	int		i;
 	int		j;
 
 	if (!src)
 		return (0);
-	i = 0;
+	i = -1;
 	j = 0;
-	while(src[i] && j < len)
+	while (src[++i] && j < len)
 	{
-		if ((MB_CUR_MAX > 1 && src[i] <= 0x7F) ||
-			(MB_CUR_MAX == 1 && src[i] <= 0xFF))
-			dst[j++] = src[i];
-		else if (src[i] <= 0x7FF && MB_CUR_MAX >= 2)
-		{
-			dst[j++] = (src[i] >> 6) + 0xC0;
-			dst[j++] = (src[i] & 0x3F) + 0x80;
-		}
-		else if (src[i] <= 0xFFFF && MB_CUR_MAX >= 3)
-		{
-			dst[j++] = (src[i] >> 12) + 0xE0;
-			dst[j++] = ((src[i] >> 6) & 0x3F) + 0x80;
-			dst[j++] = (src[i] & 0x3F) + 0x80;
-		}
-		else if (src[i] <= 0x10FFFF && MB_CUR_MAX >= 4)
-		{
-			dst[j++] = (src[i] >> 18) + 0xF0;
-			dst[j++] = ((src[i] >> 12) & 0x3F) + 0x80;
-			dst[j++] = ((src[i] >> 6) & 0x3F) + 0x80;
-			dst[j++] = (src[i] & 0x3F) + 0x80;
-		}
-		else
-			return (0);
-		i++;
+		ft_conv(*dst, src, &i, &j);
 	}
 	return (j <= i ? j : i);
 }
@@ -123,6 +123,6 @@ int		ft_convert_wstr_to_str(char **dst, wchar_t *wstr, int limit)
 	else if (limit <= 0 && (new_len = ft_wstr_unilen(wstr)) == -1)
 		return (-1);
 	if ((*dst = ft_strnew(new_len)))
-		ft_wstr_unicpy(*dst, wstr, new_len);
+		ft_wstr_unicpy(dst, wstr, new_len);
 	return (new_len);
 }

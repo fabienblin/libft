@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_itoa_type.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 13:45:08 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/19 20:18:48 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 19:11:35 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,12 +52,7 @@ char		*ft_intmax_itoa_type(intmax_t n, char t)
 		ret = ft_strjoinfree(ft_strdup("-"), ft_uintmax_itoa_type(n, t));
 		return (ret);
 	}
-	if (t == 'o' || t == 'O')
-		base = 8;
-	else if (t == 'x' || t == 'X')
-		base = 16;
-	else
-		base = 10;
+	base = ft_get_type_base(t);
 	neg = (n < 0);
 	n = neg ? -n : n;
 	ret_size = ft_intlen_base(n, base) + neg;
@@ -79,12 +74,7 @@ char		*ft_uintmax_itoa_type(uintmax_t n, char t)
 	int		ret_size;
 	int		base;
 
-	if (t == 'o' || t == 'O')
-		base = 8;
-	else if (t == 'x' || t == 'X')
-		base = 16;
-	else
-		base = 10;
+	base = ft_get_type_base(t);
 	ret_size = ft_uintlen_base(n, base);
 	if (!(ret = ft_strnew(ret_size)))
 		return (NULL);

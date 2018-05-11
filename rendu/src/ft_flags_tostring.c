@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:11:58 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 17:32:55 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 18:58:40 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 void	ft_flag_hashtag_tostring(t_format *f)
 {
 	char	*tmp;
-	
+
 	tmp = NULL;
 	if ((f->type == 'o' || f->type == 'O') && f->tostring[0] != '0')
 		f->tostring = ft_strjoinfree(ft_strdup("0"), f->tostring);

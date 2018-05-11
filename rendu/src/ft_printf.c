@@ -6,13 +6,12 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:20:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 16:50:59 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 19:30:20 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 void	ft_tostring(t_format *f, va_list ap)
 {
@@ -24,7 +23,7 @@ void	ft_tostring(t_format *f, va_list ap)
 		if (ft_type_tostring(f, ap) == -1)
 		{
 			f->err = 1;
-			return;
+			return ;
 		}
 		if (f->preci >= 0)
 			ft_preci_tostring(f);
@@ -35,7 +34,7 @@ void	ft_tostring(t_format *f, va_list ap)
 	}
 }
 
-int	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	t_format	*f;

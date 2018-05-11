@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_lstiter.c                                     .::    .:/ .      .::   */
+/*   ft_itoa_type_ext.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 17:35:24 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/28 17:35:24 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/11 19:10:57 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/11 19:11:56 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+int	ft_get_type_base(char t)
 {
-	if (lst)
-	{
-		f(lst);
-		ft_lstiter(lst->next, f);
-	}
+	int	base;
+
+	if (t == 'o' || t == 'O')
+		base = 8;
+	else if (t == 'x' || t == 'X')
+		base = 16;
+	else
+		base = 10;
+	return (base);
 }

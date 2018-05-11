@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:14:08 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 17:18:34 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 19:29:15 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,10 +32,10 @@ int		ft_unilen(unsigned char *str, int preci)
 			octet += 4;
 		else if (octet + 1 <= preci &&
 			((str[octet] >= 0x01 && str[octet] <= 0xFF && MB_CUR_MAX == 1) ||
-			 (str[octet] >= 0x01 && str[octet] <= 0x7F && MB_CUR_MAX > 1)))
+			(str[octet] >= 0x01 && str[octet] <= 0x7F && MB_CUR_MAX > 1)))
 			octet += 1;
 		else
-			break;
+			break ;
 	}
 	return (octet);
 }
@@ -63,9 +63,11 @@ void	ft_preci_tostring(t_format *f)
 
 	if (!(f->type == 'c' || f->type == 'C'))
 	{
-		if ((f->type == 's' || f->type == 'S') && f->preci < (int)ft_strlen(f->tostring))
-				f->tostring = ft_unirealloc(&f->tostring, f->preci);
-		else if (!(f->type == 's' || f->type == 'S' || f->type == '%') && f->preci >= (int)ft_strlen(f->tostring))
+		if ((f->type == 's' || f->type == 'S') &&
+			f->preci < (int)ft_strlen(f->tostring))
+			f->tostring = ft_unirealloc(&f->tostring, f->preci);
+		else if (!(f->type == 's' || f->type == 'S' || f->type == '%') &&
+			f->preci >= (int)ft_strlen(f->tostring))
 		{
 			tmp_len = f->preci - ft_strlen(f->tostring);
 			if (f->type == 'p')

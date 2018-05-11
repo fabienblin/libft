@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_ptoa.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 14:21:32 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/07 14:50:21 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 19:31:11 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,14 +46,12 @@ char		*ft_ptoa_base(long int n, int base)
 	return (ret);
 }
 
-char	*ft_ptoa(void *p)
+char		*ft_ptoa(void *p)
 {
-	char		*a;
-	
+	char	*a;
+
 	a = NULL;
 	if (p)
-	{
 		a = ft_ptoa_base((long int)p, 16);
-	}
 	return (a);
 }

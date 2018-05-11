@@ -6,7 +6,7 @@
 #   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     #
 #                                                 #+#   #+    #+    #+#      #
 #   Created: 2018/05/11 12:38:06 by fablin       #+#   ##    ##    #+#       #
-#   Updated: 2018/05/11 12:38:08 by fablin      ###    #+. /#+    ###.fr     #
+#   Updated: 2018/05/11 19:43:16 by fablin      ###    #+. /#+    ###.fr     #
 #                                                         /                  #
 #                                                        /                   #
 # ************************************************************************** #
@@ -22,10 +22,11 @@ INC_DIR =	./inc/
 LIB_DIR	=	./libft/
 
 CFILES	=	ft_constuctors.c	ft_destructors.c	ft_parse.c	ft_printf.c	\
-			ft_format_setters.c			ft_itoa_type.c			\
+			ft_format_setters.c	ft_itoa_type.c		ft_preci_tostring.c		\
 			ft_ptoa.c			ft_strgen.c			ft_puttostring.c		\
 			ft_unicode.c		ft_type_tostring.c	ft_width_tostring.c		\
-			ft_preci_tostring.c	ft_flags_tostring.c
+			ft_flags_tostring.c	ft_format_setters_ext.c						\
+			ft_itoa_type_ext.c	ft_type_tostring_ext.c
 			
 
 OFILES	=	$(CFILES:.c=.o)
@@ -46,7 +47,7 @@ $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(INC_DIR)ft_printf.h ./libft/inc/libft.h
 					gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR) -I ./libft/inc/
 
 ./obj/	:
-				mkdir -p $(OBJ_DIR)
+			mkdir -p $(OBJ_DIR)
 
 ./libft/libft.a	:
 			make -C $(LIB_DIR)

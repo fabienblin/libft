@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:14:12 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 17:26:11 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 20:42:12 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@ void	ft_width_tostring_more(t_format *f)
 {
 	char *p;
 
-	if (f->type == 'd'|| f->type == 'D' || f->type == 'i')
+	if (f->type == 'd' || f->type == 'D' || f->type == 'i')
 	{
 		if ((p = ft_strchr(f->tostring, '+')) && (p[-1] == '0'))
 		{
