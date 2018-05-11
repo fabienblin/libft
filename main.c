@@ -1,13 +1,14 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fablin <fablin@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/10 11:25:44 by fablin            #+#    #+#             */
-/*   Updated: 2018/05/02 18:17:28 by fablin           ###   ########.fr       */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   main.c                                           .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/07 17:21:28 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/11 17:38:12 by fablin      ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
 
 
@@ -28,10 +29,9 @@ int main (int argc, char **argv)
 */	setlocale(LC_ALL, "");
 	(void)argc;
 	(void)argv;
-// a faire :
-
-	int a = printf("   printf = %S\n", L"����");
-	int b = ft_printf("ft_printf = %S\n", L"����");
+		
+	int a = printf("   printf = %.0p, %.p\n", 0, 0) - 13;
+	int b = ft_printf("ft_printf = %.0p, %.p\n", 0, 0) - 13;
 	if (a == b)
 		printf("OK\n");
 	else

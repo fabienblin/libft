@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_type_tostring.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 13:28:21 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/28 13:28:44 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 16:23:15 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ int		ft_type_s_tostring(t_format *f, va_list ap)
 	if ((f->type == 's' && f->size == L) || f->type == 'S')
 	{
 		tmp = va_arg(ap, wchar_t *);
-		if (ft_convert_wstr_to_str(&f->tostring, tmp) == -1)
+		if (ft_convert_wstr_to_str(&f->tostring, tmp, f->preci) == -1)
 			return (-1);
 		f->arg = ft_strdup(f->tostring);
 	}
@@ -45,13 +45,13 @@ int	ft_type_c_tostring(t_format *f, va_list ap)
 	{
 		tmp[0] = va_arg(ap, wchar_t);
 		tmp[1] = 0;
-		if (ft_convert_wstr_to_str(&f->tostring, (wchar_t *)tmp) == -1)
+		if (ft_convert_wstr_to_str(&f->tostring, (wchar_t *)tmp, f->preci) == -1)
 			return (-1);
 	}
 	else
 	{
-		f->tostring = ft_strnew(sizeof(int));
-		*(int *)f->tostring = va_arg(ap, int);
+		f->tostring = ft_strnew(sizeof(char));
+		*f->tostring = (char)va_arg(ap, int);
 	}
 	f->arg = f->tostring[0] ? ft_strdup(f->tostring) : NULL;
 	return (1);
@@ -62,7 +62,6 @@ void	ft_type_p_tostring(t_format *f, va_list ap)
 	if (!(f->tostring = ft_ptoa(va_arg(ap, void *))))
 		f->tostring = ft_strdup("0");
 	f->arg = ft_strdup(f->tostring);
-	//f->tostring = ft_strjoinfree(ft_strdup("0X"), f->tostring);
 	f->flags[3] = '#';
 }
 

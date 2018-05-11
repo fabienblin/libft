@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_printf.h                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/28 12:17:06 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/28 16:26:26 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 15:48:25 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,7 @@ typedef struct	s_format
 	char				*tostring;	//	chaine de sortie
 	void				*arg;		//	ap
 	char				*form;		// "% ls"
+	int					err;		//err is true if ft_tostring == -1
 }				t_format;
 
 // misc
@@ -55,7 +56,7 @@ char		*ft_ptoa(void *p);
 char		*ft_strgen(int c, int len);
 void		ft_del_format_lst(t_format *f);
 int			ft_puttostring_fd(t_format *f, int fd);
-int			ft_convert_wstr_to_str(char **dst, wchar_t *wstr);
+int			ft_convert_wstr_to_str(char **dst, wchar_t *wstr, int limit);
 
 // ft_format_setters.c
 char		*ft_set_flags(char *c, t_format *f);

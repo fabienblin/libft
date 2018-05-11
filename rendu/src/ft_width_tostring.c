@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_width_tostring.c                              .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:14:12 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/29 17:02:07 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/11 17:26:11 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,7 +44,6 @@ void	ft_width_tostring(t_format *f)
 	if (width_len > 0)
 	{
 		width = ft_strgen(' ', width_len);
-		
 		f->tostring = f->flags[1] == '-' ?
 			ft_strjoinfree(f->tostring, width) :
 			ft_strjoinfree(width, f->tostring);
