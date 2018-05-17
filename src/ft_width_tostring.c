@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:14:12 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 20:42:12 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:49:46 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_width_tostring_more(t_format *f)
+static void	ft_width_tostring_more(t_format *f)
 {
 	char *p;
 
@@ -32,7 +32,7 @@ void	ft_width_tostring_more(t_format *f)
 	}
 }
 
-void	ft_width_tostring(t_format *f)
+void		ft_width_tostring(t_format *f)
 {
 	char	*width;
 	int		width_len;

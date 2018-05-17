@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 14:21:32 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 19:31:11 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:46:01 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ static char	ft_base_tochar(long int toprint, int base)
 	return ('0' + toprint);
 }
 
-char		*ft_ptoa_base(long int n, int base)
+static char	*ft_ptoa_base(long int n, int base)
 {
 	char			*ret;
 	int				ret_size;

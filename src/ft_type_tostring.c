@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 13:28:21 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 19:57:50 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:48:44 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_type_exceptions(t_format *f)
+static void	ft_type_exceptions(t_format *f)
 {
 	int	t;
 	int	c;
@@ -29,7 +29,7 @@ void	ft_type_exceptions(t_format *f)
 		ft_strrealloc(&f->tostring, 0);
 }
 
-int		ft_type_tostring(t_format *f, va_list ap)
+int			ft_type_tostring(t_format *f, va_list ap)
 {
 	if (f->type)
 	{

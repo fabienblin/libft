@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   libft.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:42 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/09 14:45:52 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:53:51 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@
 # include <unistd.h>
 
 # include "get_next_line.h"
+# include "ft_printf.h"
 
 /*
 **FIRST PART

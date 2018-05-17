@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:14:08 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 19:29:15 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:50:01 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_unilen(unsigned char *str, int preci)
+static int	ft_unilen(unsigned char *str, int preci)
 {
 	int		octet;
 	int		len;
@@ -40,7 +40,7 @@ int		ft_unilen(unsigned char *str, int preci)
 	return (octet);
 }
 
-char	*ft_unirealloc(char **src, int preci)
+static char	*ft_unirealloc(char **src, int preci)
 {
 	char	*new;
 	int		len;
@@ -56,7 +56,7 @@ char	*ft_unirealloc(char **src, int preci)
 	return (new);
 }
 
-void	ft_preci_tostring(t_format *f)
+void		ft_preci_tostring(t_format *f)
 {
 	char	*tmp;
 	int		tmp_len;

@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/29 11:27:02 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 19:27:00 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:48:02 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_find_type(char *str)
+static char	*ft_find_type(char *str)
 {
 	char	*type;
 
@@ -33,7 +33,7 @@ char		*ft_find_type(char *str)
 	return (NULL);
 }
 
-void		ft_format_push(t_format **alst, t_format *new)
+static void	ft_format_push(t_format **alst, t_format *new)
 {
 	if (!*alst)
 		*alst = new;

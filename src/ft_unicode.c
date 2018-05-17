@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 13:28:14 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 20:41:42 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:49:21 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_wstr_unilen_preci(wchar_t *src, int preci)
+static int	ft_wstr_unilen_preci(wchar_t *src, int preci)
 {
 	int		len;
 	int		i;
@@ -42,7 +42,7 @@ int		ft_wstr_unilen_preci(wchar_t *src, int preci)
 	return (len);
 }
 
-int		ft_wstr_unilen(wchar_t *src)
+static int	ft_wstr_unilen(wchar_t *src)
 {
 	int		len;
 	int		i;
@@ -71,7 +71,7 @@ int		ft_wstr_unilen(wchar_t *src)
 	return (len);
 }
 
-void	ft_conv(char *dst, wchar_t *src, int *i, int *j)
+static void	ft_conv(char *dst, wchar_t *src, int *i, int *j)
 {
 	if ((MB_CUR_MAX > 1 && src[*i] <= 0x7F) ||
 		(MB_CUR_MAX == 1 && src[*i] <= 0xFF))
@@ -96,7 +96,7 @@ void	ft_conv(char *dst, wchar_t *src, int *i, int *j)
 	}
 }
 
-int		ft_wstr_unicpy(char **dst, wchar_t *src, int len)
+static int	ft_wstr_unicpy(char **dst, wchar_t *src, int len)
 {
 	int		i;
 	int		j;
@@ -112,7 +112,7 @@ int		ft_wstr_unicpy(char **dst, wchar_t *src, int len)
 	return (j <= i ? j : i);
 }
 
-int		ft_convert_wstr_to_str(char **dst, wchar_t *wstr, int limit)
+int			ft_convert_wstr_to_str(char **dst, wchar_t *wstr, int limit)
 {
 	int		new_len;
 

@@ -6,14 +6,14 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 15:11:58 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/11 18:58:40 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 13:41:54 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_flag_hashtag_tostring(t_format *f)
+static void	ft_flag_hashtag_tostring(t_format *f)
 {
 	char	*tmp;
 
@@ -29,7 +29,7 @@ void	ft_flag_hashtag_tostring(t_format *f)
 	}
 }
 
-void	ft_flag_plus_tostring(t_format *f)
+static void	ft_flag_plus_tostring(t_format *f)
 {
 	if (!ft_strchr(f->tostring, '-') &&
 	(f->type == 'd' || f->type == 'D' || f->type == 'i') &&
@@ -39,7 +39,7 @@ void	ft_flag_plus_tostring(t_format *f)
 	}
 }
 
-void	ft_flag_space_tostring(t_format *f)
+static void	ft_flag_space_tostring(t_format *f)
 {
 	if (!ft_strchr(f->arg, '-') &&
 		(f->type == 'd' || f->type == 'D' || f->type == 'i') &&
@@ -47,7 +47,7 @@ void	ft_flag_space_tostring(t_format *f)
 		f->tostring = ft_strjoinfree(ft_strdup(" "), f->tostring);
 }
 
-void	ft_flag_zero_tostring(t_format *f)
+static void	ft_flag_zero_tostring(t_format *f)
 {
 	char	*tmp;
 	int		tmp_len;
@@ -70,7 +70,7 @@ void	ft_flag_zero_tostring(t_format *f)
 	}
 }
 
-void	ft_flags_tostring(t_format *f)
+void		ft_flags_tostring(t_format *f)
 {
 	if (f->flags[0] == '+')
 		ft_flag_plus_tostring(f);
