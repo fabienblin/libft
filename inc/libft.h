@@ -21,6 +21,8 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 
+# define	INF	(0x7FFFFFFF)
+
 /*
 **FIRST PART
 */
