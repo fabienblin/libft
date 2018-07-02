@@ -101,8 +101,6 @@ typedef struct	s_point
 {
 	int	x;
 	int	y;
-	int	proj_x;
-	int	proj_y;
 }				t_point;
 
 typedef struct	s_segment

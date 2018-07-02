@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/02 15:31:47 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/02 15:41:30 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/02 17:15:50 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,8 +21,6 @@ t_point	*ft_newpoint(int x, int y)
 		return (NULL);
 	p->x = x;
 	p->y = y;
-	p->proj_x = x;
-	p->proj_y = y;
 	return (p);
 }
 

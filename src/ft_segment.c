@@ -28,8 +28,8 @@ t_seg	*ft_newsegment(t_point *a, t_point *b)
 	{
 		seg->a = a;
 		seg->b = b;
-		seg->dx = b->proj_x - a->proj_x;
-		seg->dy = b->proj_y - a->proj_y;
+		seg->dx = b->x - a->x;
+		seg->dy = b->y - a->y;
 		seg->xinc = (seg->dx > 0 ? 1 : -1);
 		seg->yinc = (seg->dy > 0 ? 1 : -1);
 		seg->dx = abs(seg->dx);
