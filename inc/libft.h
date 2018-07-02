@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:42 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 13:53:51 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/02 16:44:10 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,6 +87,32 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+typedef struct	s_grid
+{
+	int		**data;
+	int		x;
+	int		y;
+	int		size;
+}				t_grid;
+
+typedef struct	s_point
+{
+	int	x;
+	int	y;
+	int	proj_x;
+	int	proj_y;
+}				t_point;
+
+typedef struct	s_segment
+{
+	t_point *a;
+	t_point *b;
+	int		dx;
+	int		dy;
+	int		xinc;
+	int		yinc;
+}				t_seg;
+
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -107,5 +133,12 @@ char			*ft_itoa_base(int n, int base);
 int				ft_abs(int x);
 char			*ft_strtolower(char *str);
 char			*ft_strrealloc(char **str, size_t size);
+void			ft_delgrid(t_grid **grid);
+void			ft_delsegment(t_seg **seg);
+void			ft_delpoint(t_point **p);
+t_grid			*ft_newgrid(int x, int y);
+t_seg			*ft_newsegment(t_point *a, t_point *b);
+t_point			*ft_newpoint(int x, int y);
+void			bresenham(t_grid *grid, t_seg *seg, int val);
 
 #endif
