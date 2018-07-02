@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:42 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/02 16:44:10 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/02 17:33:27 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -112,6 +112,13 @@ typedef struct	s_segment
 	int		xinc;
 	int		yinc;
 }				t_seg;
+
+typedef struct	s_ntree
+{
+	t_point			*coord;
+	int				nb;
+	struct s_ntree	*sons;
+}				t_ntree;
 
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
