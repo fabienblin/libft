@@ -6,12 +6,12 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/02 17:02:47 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/02 17:41:25 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/04 14:07:45 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.c"
+#include "libft.h"
 
 t_ntree		*ft_newntree(t_point *coord, int nb, t_ntree *sons)
 {
@@ -31,7 +31,7 @@ void		ft_delntree(t_ntree **t)
 	if (t && *t)
 	{
 		i = 0;
-		while (i < (*t)->nb)
+		while (i < (*t)->nb && (*t)->sons[i])
 		{
 			ft_delntree(&((*t)->sons[i]));
 			i++;

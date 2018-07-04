@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:42 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/02 17:33:27 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/04 14:05:01 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 
-# define	INF	(0x7FFFFFFF)
+# define INF (0x7FFFFFFF)
 
 /*
 **FIRST PART
