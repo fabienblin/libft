@@ -31,6 +31,7 @@ FABLIN =	ft_exit.c		ft_realloc.c	ft_lstpush.c	ft_lstdup.c		\
 			ft_swapptr.c	get_next_line.c	ft_strjoinfree.c				\
 			ft_itoa_base.c	ft_abs.c		ft_strtolower.c	ft_strrealloc.c	\
 			ft_bresenham.c	ft_grid.c		ft_point.c		ft_segment.c	\
+			ft_ntree.c
 
 BONUS =		ft_lstnew.c		ft_lstdelone.c	ft_lstdel.c		ft_lstadd.c		\
 			ft_lstiter.c	ft_lstmap.c
