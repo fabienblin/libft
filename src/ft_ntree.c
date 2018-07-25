@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-t_ntree		*ft_newntree(t_point *coord, int nb, t_ntree *sons)
+t_ntree		*ft_newntree(t_point *coord, int nb, t_ntree **sons)
 {
 	t_ntree	*new;
 
@@ -22,6 +22,7 @@ t_ntree		*ft_newntree(t_point *coord, int nb, t_ntree *sons)
 	new->coord = coord ? coord : ft_newpoint(0, 0);
 	new->nb = nb;
 	new->sons = sons;
+	return (new);
 }
 
 void		ft_delntree(t_ntree **t)
