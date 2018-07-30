@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/02 17:02:47 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/29 20:12:06 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/30 16:03:00 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,8 +40,12 @@ void		ft_delntree(t_ntree **t)
 {
 	if (t && *t)
 	{
-		ft_lstdel(&(*t)->sons, delson);
-		ft_delpoint(&(*t)->coord);
+		if ((*t)->name)
+			ft_strdel(&(*t)->name);
+		if ((*t)->sons)
+			ft_lstdel(&(*t)->sons, delson);
+		if ((*t)->coord)
+			ft_delpoint(&(*t)->coord);
 		free(*t);
 		*t = NULL;
 	}

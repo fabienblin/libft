@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_atoi.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:22 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/28 17:35:22 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/30 15:53:53 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,16 +31,19 @@ int			ft_atoi(const char *str)
 
 	ret = 0;
 	sign = 1;
-	while (ft_iswhite(*str))
-		str++;
-	if (ft_issign(*str))
-		sign = (*str++ == '-' ? -1 : 1);
-	while (*str)
+	if (str)
 	{
-		if (!ft_isdigit(*str))
-			return ((int)ret * sign);
-		ret = (ret * 10) + (*str - '0');
-		str++;
+		while (*str && ft_iswhite(*str))
+			str++;
+		if (ft_issign(*str))
+			sign = (*str++ == '-' ? -1 : 1);
+		while (*str)
+		{
+			if (!ft_isdigit(*str))
+				return ((int)ret * sign);
+			ret = (ret * 10) + (*str - '0');
+			str++;
+		}
 	}
 	return ((int)ret * sign);
 }
