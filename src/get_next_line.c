@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/10 18:25:57 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/01 19:40:50 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/01 20:07:47 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,7 +99,7 @@ int				get_next_line(int const fd, char **line)
 		return (-1);
 	rdr = ft_getreader(&rdr_lst, fd);
 	gnl = get_line(rdr, line);
-	if (gnl == 0)
+	if (gnl <= 0)
 		ft_lstdel(&rdr_lst, delrdrlst);
 	return (gnl > 0 ? 1 : gnl);
 }
