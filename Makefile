@@ -6,7 +6,7 @@
 #   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     #
 #                                                 #+#   #+    #+    #+#      #
 #   Created: 2017/11/28 17:35:55 by fablin       #+#   ##    ##    #+#       #
-#   Updated: 2018/07/02 16:04:54 by fablin      ###    #+. /#+    ###.fr     #
+#   Updated: 2018/08/01 19:41:50 by fablin      ###    #+. /#+    ###.fr     #
 #                                                         /                  #
 #                                                        /                   #
 # ************************************************************************** #
@@ -31,7 +31,7 @@ FABLIN =	ft_exit.c		ft_realloc.c	ft_lstpush.c	ft_lstdup.c		\
 			ft_swapptr.c	get_next_line.c	ft_strjoinfree.c				\
 			ft_itoa_base.c	ft_abs.c		ft_strtolower.c	ft_strrealloc.c	\
 			ft_bresenham.c	ft_grid.c		ft_point.c		ft_segment.c	\
-			ft_ntree.c
+			ft_ntree.c		ft_strfreejoin.c
 
 BONUS =		ft_lstnew.c		ft_lstdelone.c	ft_lstdel.c		ft_lstadd.c		\
 			ft_lstiter.c	ft_lstmap.c

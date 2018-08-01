@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_lstnew.c                                      .::    .:/ .      .::   */
+/*   ft_strfreejoin.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 17:35:24 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/31 21:20:01 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/08/01 19:40:09 by fablin       #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/01 19:40:46 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+char			*ft_strfreejoin(char *s1, char *s2)
 {
-	t_list *new;
+	char *join;
 
-	if (!(new = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ft_bzero(new, sizeof(t_list));
-	if (content)
+	join = NULL;
+	if (!s1)
+		join = ft_strdup(s2);
+	else if (!s2)
 	{
-		new->content = ft_memcpy((void *)malloc(content_size),
-				content, content_size);
-		new->content_size = content_size;
+		join = ft_strdup(s1);
+		free(s1);
 	}
-	return (new);
+	else
+	{
+		join = ft_strjoin(s1, s2);
+		free(s1);
+	}
+	return (join);
 }

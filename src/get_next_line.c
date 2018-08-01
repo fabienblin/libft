@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   get_next_line.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/10 18:25:57 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 18:47:08 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/01 19:40:50 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,26 +49,6 @@ static t_reader	*ft_getreader(t_list **rdr_lst, int fd)
 	return (rdr);
 }
 
-char			*ft_strfreejoin(char *s1, char *s2)
-{
-	char *join;
-
-	join = NULL;
-	if (!s1)
-		join = ft_strdup(s2);
-	else if (!s2)
-	{
-		join = ft_strdup(s1);
-		free(s1);
-	}
-	else
-	{
-		join = ft_strjoin(s1, s2);
-		free(s1);
-	}
-	return (join);
-}
-
 static int		get_line(t_reader *rdr, char **line)
 {
 	int		siz;
@@ -98,6 +78,16 @@ static int		get_line(t_reader *rdr, char **line)
 	return (siz);
 }
 
+void			delrdrlst(void *rdr, size_t size)
+{
+	(void)size;
+	if (rdr)
+	{
+		if (((t_reader *)rdr)->prev)
+			free(((t_reader *)rdr)->prev);
+	}
+}
+
 int				get_next_line(int const fd, char **line)
 {
 	static t_list	*rdr_lst = NULL;
@@ -109,5 +99,7 @@ int				get_next_line(int const fd, char **line)
 		return (-1);
 	rdr = ft_getreader(&rdr_lst, fd);
 	gnl = get_line(rdr, line);
+	if (gnl == 0)
+		ft_lstdel(&rdr_lst, delrdrlst);
 	return (gnl > 0 ? 1 : gnl);
 }
