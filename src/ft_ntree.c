@@ -6,25 +6,12 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/02 17:02:47 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/01 13:48:42 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/02 15:07:06 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int		ft_count_sons(t_list *sons)
-{
-	int	i;
-	
-	i = 0;
-	while(sons)
-	{
-		sons = sons->next;
-		i++;
-	}
-	return (i);
-}
 
 t_ntree		*ft_newntree(char *name, t_point *coord, int depth, t_list *sons)
 {
@@ -38,7 +25,7 @@ t_ntree		*ft_newntree(char *name, t_point *coord, int depth, t_list *sons)
 	new->depth = depth;
 	new->sons = sons;
 	if (sons)
-		new->nbsons = ft_count_sons(sons);
+		new->nbsons = ft_lstlen(sons);
 	return (new);
 }
 
