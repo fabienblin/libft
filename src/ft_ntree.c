@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/02 17:02:47 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/02 15:07:06 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/31 19:47:37 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ t_ntree		*ft_newntree(char *name, t_point *coord, int depth, t_list *sons)
 	return (new);
 }
 
-void delson(void *son, size_t size)
+void		delson(void *son, size_t size)
 {
 	(void)size;
 	if (son)

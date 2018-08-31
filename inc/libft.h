@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:42 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/02 15:07:13 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/31 19:48:43 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -149,7 +149,7 @@ void			ft_delntree(t_ntree **t);
 t_grid			*ft_newgrid(int x, int y);
 t_seg			*ft_newsegment(t_point *a, t_point *b);
 t_point			*ft_newpoint(int x, int y);
-t_ntree			*ft_newntree(char *name, t_point *coord, int depth, t_list *sons);
+t_ntree			*ft_newntree(char *name, t_point *coord, int dept, t_list *son);
 int				ft_lstlen(t_list *sons);
 void			bresenham(t_grid *grid, t_seg *seg, int val);
 

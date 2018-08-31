@@ -6,7 +6,7 @@
 /*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 17:35:25 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/30 15:36:06 by fablin      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/25 20:44:04 by fablin      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 void	ft_lstpush(t_list **alst, t_list *new)
 {
-	if (*alst)
+	if (alst && *alst)
 		ft_lstpush(&(*alst)->next, new);
 	else
 		*alst = new;
