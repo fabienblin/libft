@@ -6,12 +6,14 @@
 #   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     #
 #                                                 #+#   #+    #+    #+#      #
 #   Created: 2017/11/28 17:35:55 by fablin       #+#   ##    ##    #+#       #
-#   Updated: 2018/10/03 11:06:45 by fablin      ###    #+. /#+    ###.fr     #
+#   Updated: 2018/10/03 18:53:33 by fablin      ###    #+. /#+    ###.fr     #
 #                                                         /                  #
 #                                                        /                   #
 # ************************************************************************** #
 
 SRC_DIR =	./src/
+
+PRINTF_DIR = ./src/ft_printf/
 
 OBJ_DIR =	./obj/
 
@@ -51,7 +53,7 @@ CFILES =	ft_memset.c		ft_strcat.c		ft_isdigit.c	ft_striter.c	\
 			ft_strncpy.c	ft_isalpha.c	ft_strclr.c		ft_itoa.c		\
 			$(BONUS)		$(FABLIN)
 
-SOURCES =	$(addprefix $(SRC_DIR), $(CFILES)) $(addprefix "./src/ft_printf/", $(FT_PRINTF))
+SOURCES =	$(addprefix $(SRC_DIR), $(CFILES)) $(addprefix $(PRINTF_DIR), $(FT_PRINTF))
 
 OFILES =	$(CFILES:.c=.o) $(FT_PRINTF:.c=.o)
 
@@ -61,14 +63,20 @@ FLAGS =		-Wall -Wextra -Werror
 
 all : $(NAME)
 
-$(NAME) :
-	gcc $(FLAGS) -c $(SOURCES) -I $(INC_DIR)
-	ar rc $(NAME) $(OFILES)
-	mkdir -p $(OBJ_DIR)
-	mv $(OFILES) $(OBJ_DIR)
+$(NAME) : obj $(OBJECTS)
+	ar rc $(NAME) $(OBJECTS)
 	@echo "===> LIBFT HAS BEEN COMPILED <==="
 
-clean :
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR)
+
+$(OBJ_DIR)%.o : $(PRINTF_DIR)%.c
+	gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR)
+
+obj :
+	@mkdir -p $(OBJ_DIR)
+
+clean : obj
 	@rm -rf $(OBJ_DIR)
 
 fclean : clean
