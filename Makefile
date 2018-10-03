@@ -6,7 +6,7 @@
 #   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     #
 #                                                 #+#   #+    #+    #+#      #
 #   Created: 2017/11/28 17:35:55 by fablin       #+#   ##    ##    #+#       #
-#   Updated: 2018/08/02 15:07:44 by fablin      ###    #+. /#+    ###.fr     #
+#   Updated: 2018/10/03 11:06:45 by fablin      ###    #+. /#+    ###.fr     #
 #                                                         /                  #
 #                                                        /                   #
 # ************************************************************************** #
@@ -49,11 +49,11 @@ CFILES =	ft_memset.c		ft_strcat.c		ft_isdigit.c	ft_striter.c	\
 		 	ft_strdup.c		ft_strncmp.c	ft_strnew.c		ft_strtrim.c	\
 			ft_strcpy.c		ft_atoi.c		ft_strdel.c		ft_strsplit.c	\
 			ft_strncpy.c	ft_isalpha.c	ft_strclr.c		ft_itoa.c		\
-			$(BONUS)		$(FABLIN)		$(FT_PRINTF)
+			$(BONUS)		$(FABLIN)
 
-SOURCES =	$(addprefix $(SRC_DIR), $(CFILES))
+SOURCES =	$(addprefix $(SRC_DIR), $(CFILES)) $(addprefix "./src/ft_printf/", $(FT_PRINTF))
 
-OFILES =	$(CFILES:.c=.o)
+OFILES =	$(CFILES:.c=.o) $(FT_PRINTF:.c=.o)
 
 OBJECTS =	$(addprefix $(OBJ_DIR), $(OFILES))
 
