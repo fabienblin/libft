@@ -1,6 +1,6 @@
 # Libft
 
-Librairie C - Projet de cursus
+Librairie C - Scholarship project
 
 ## Getting Started
 
