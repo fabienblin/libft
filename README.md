@@ -35,5 +35,5 @@ It will compile the library into libft.a, used for all C following projects.
 
 ## Author
 
-* **Fabien Blin** @ 42
+* **Fabien Blin** @ 42 Lyon
 
